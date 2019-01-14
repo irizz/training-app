@@ -6,6 +6,7 @@ var htmlPlugin = new HtmlWebpackPlugin({
     filename: "./index.html"
 });
 
+
 module.exports = {
     entry: './src/index.jsx',
     output: {

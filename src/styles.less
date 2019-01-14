@@ -1,8 +1,81 @@
-body {
-    background: white;
-    text-align: center;
+// common
+button[disabled] {
+    cursor: default !important
+}
+.navbar-default .navbar-brand:hover {
+    cursor: pointer
+}
 
-    span {
-        font-size: 50px;
-    }
+//grid corrections
+.alert {
+    margin: 0;
+    padding: 5px 10px 5px 10px
+}
+.panel {
+    margin: 3px
+}
+.navbar {
+    margin: 0 3px 3px 3px;
+}
+.CodeMirror {
+    height: 200px
+}
+.no-padding-panel-body, .sandbox-col1, .sandbox-col2  {
+    padding: 0
+}
+.sandbox-col2 .panel .panel-body {
+    height: 251px   
+}
+.no-border-panel {
+    box-shadow: none;
+    border: none;
+    margin: 0
+}
+.right-align-btn {
+    float: right
+}
+.center-align-btn {
+    margin-left: 35%;
+    margin-right: 35%;
+    width: 30%
+}
+
+//output tabs styling
+#controlled-tab-pane-1, #controlled-tab-pane-2 {
+    height: 250px;
+    font-size: 13px;
+    overflow-y: scroll;
+    padding: 15px;
+}
+#controlled-tab .nav {
+    background-color: #f5f5f5
+}
+
+//mocha report styling
+#mocha ul {
+    padding-left: 10px;
+    list-style-type: none
+}
+#mocha-stats {
+    padding-top: 15px
+}
+#mocha-stats .progress, .duration, .replay {
+    display: none
+}
+#mocha-report .suite h1, #mocha-report .suite h2 {
+    font-size: 13px;
+    margin: 2px
+}
+#mocha-report .suite h1 a {
+    pointer-events: none;
+    color: inherit;
+    font-weight: bold
+}
+#mocha-report .suite ul {
+    padding-left: 18px;
+    list-style-type: circle
+}
+#mocha-report .suite ul .test.fail pre {
+    padding: 5px;
+    font-size: 12px
 }
