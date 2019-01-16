@@ -2,7 +2,7 @@ import React from 'react';
 //components
 import { TaskSelection } from './TaskSelection';
 //style
-import { Panel } from 'react-bootstrap';
+import { Panel, ListGroup, ListGroupItem } from 'react-bootstrap';
 
 export class Home extends React.Component {
     constructor(props) {
@@ -13,11 +13,19 @@ export class Home extends React.Component {
         return (
             <React.Fragment>
                 <Panel>
-                    <Panel.Body>
-                        <h4>Добро пожаловать!</h4>
-                    </Panel.Body>
+                    <ListGroup>
+                        <ListGroupItem>
+                            <h4>Добро пожаловать!</h4>
+                        </ListGroupItem>
+                        <ListGroupItem>
+                            <p>Чтобы приступить к решению задач, выберите уровень сложности и/или тему, затем нажмите <strong>"Начать"</strong>. </p>
+                            <p>Можно выбрать <strong>1 или несколько</strong> уровней сложности или тем.</p>
+                            <p>При отсутствии выбранных критериев будут отображены <strong>все задачи</strong>, присутствующие в базе.</p></ListGroupItem>
+                        <ListGroupItem>
+                            <TaskSelection />
+                        </ListGroupItem>
+                    </ListGroup>
                 </Panel>
-                <TaskSelection />
             </React.Fragment>
         )
     }

@@ -3,6 +3,8 @@ import React from 'react';
 import { Output } from './Output';
 //overwritten console methods
 import { ConsoleMethods } from '../ConsoleMethods';
+//context
+import { MyContext } from './MyProvider';
 //style
 import { Col, Alert, Panel, Button } from 'react-bootstrap';
 //CodeMirror
@@ -100,10 +102,7 @@ export class Sandbox extends React.Component {
                     md={6}
                     sm={6}
                     className='sandbox-col2'>
-                    <Output
-                        output={this.state.output}
-                        currentOutputTab={this.props.currentOutputTab}
-                        handleSelectTab={this.props.handleSelectTab} />
+                    <Output output={this.state.output} />
                 </Col>
             </React.Fragment>
         )

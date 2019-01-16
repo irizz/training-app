@@ -9,13 +9,13 @@ export const Navigation = (props) => {
         <Navbar fluid>
             <Navbar.Header>
                 <LinkContainer to='/'>
-                    <NavbarBrand>
+                    <NavbarBrand >
                         TaskBook
                     </NavbarBrand>
                 </LinkContainer>
             </Navbar.Header>
             <Nav >
-                <LinkContainer to='/training'>
+                <LinkContainer to='/training' >
                     <NavItem >
                         Тренировка
                     </NavItem>
@@ -27,6 +27,5 @@ export const Navigation = (props) => {
                 </LinkContainer>
             </Nav>
         </Navbar>
-
     )
 }
