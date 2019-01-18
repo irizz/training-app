@@ -6,11 +6,11 @@ import { Navbar, NavItem, Nav, NavbarBrand } from 'react-bootstrap';
 
 export const Navigation = (props) => {
     return (
-        <Navbar fluid>
+        <Navbar fluid >
             <Navbar.Header>
-                <LinkContainer to='/'>
+                <LinkContainer to='/' >
                     <NavbarBrand >
-                        <img src='src/icons/notebook64.png' />
+                        <a href='/'><img src='src/icons/notebook64.png' width='34' height='34' /></a>
                     </NavbarBrand>
                 </LinkContainer>
             </Navbar.Header>
