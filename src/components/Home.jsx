@@ -12,20 +12,9 @@ export class Home extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Panel>
-                    <ListGroup>
-                        <ListGroupItem>
-                            <h4>Добро пожаловать!</h4>
-                        </ListGroupItem>
-                        <ListGroupItem>
-                            <p>Чтобы приступить к решению задач, выберите уровень сложности и/или тему, затем нажмите <strong>"Начать"</strong>. </p>
-                            <p>Можно выбрать <strong>1 или несколько</strong> уровней сложности или тем.</p>
-                            <p>При отсутствии выбранных критериев будут отображены <strong>все задачи</strong>, присутствующие в базе.</p></ListGroupItem>
-                        <ListGroupItem>
-                            <TaskSelection />
-                        </ListGroupItem>
-                    </ListGroup>
-                </Panel>
+                <p>
+                    Welcome
+                </p>
             </React.Fragment>
         )
     }

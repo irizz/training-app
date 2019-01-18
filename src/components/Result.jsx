@@ -13,7 +13,7 @@ export class Result extends React.Component {
         return (
             <MyContext.Consumer>
                 {(context) => (
-                    <Modal show={context.state.showModal} onHide={context.state.handleCloseModal}>
+                    <Modal show={context.state.showModal} onHide={context.handleCloseModal}>
                         <Modal.Header closeButton>
                             <Modal.Title>
                                 Результат

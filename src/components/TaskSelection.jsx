@@ -54,7 +54,7 @@ export class TaskSelection extends React.Component {
                                             value='es6'
                                             onClick={context.handleSectionCheck}> Нововведения в ES6 </Checkbox>
                                     </FormGroup>
-                                    <LinkContainer to='/training'>
+                                    <LinkContainer to='/train/session'>
                                         <Button
                                             type="submit"
                                             bsStyle='primary'

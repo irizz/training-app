@@ -16,7 +16,7 @@ export class MyProvider extends React.Component {
         complexityArr: [],
         sectionArr: [],
         filteredTasks: [],
-        currentTask: '',
+        currentTask: {},
         progressNow: 0,
         progressMax: 0,
         completed: 0,
@@ -27,13 +27,6 @@ export class MyProvider extends React.Component {
         showModal: false
     }
 
-    componentDidUpdate() {
-        if (this.state.currentTask == '') {
-            this.setState({
-                currentTask: this.state.filteredTasks[0]
-            })
-        }
-    }
 
     //filter methods for TaskSelection component
     handleComplexityCheck = () => {
@@ -75,6 +68,9 @@ export class MyProvider extends React.Component {
                 progressMax: this.state.filteredTasks.length
             })
         }
+
+        console.log(this.state.filteredTasks);
+        console.log(this.state.currentTask);
     }
 
     //handling button clicks for BtnPanel component

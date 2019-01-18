@@ -15,7 +15,12 @@ export const Navigation = (props) => {
                 </LinkContainer>
             </Navbar.Header>
             <Nav >
-                <LinkContainer to='/training' >
+            <LinkContainer to='/learn' >
+                    <NavItem >
+                        Учебник
+                    </NavItem>
+                </LinkContainer>
+                <LinkContainer to='/train'>
                     <NavItem >
                         Тренировка
                     </NavItem>
