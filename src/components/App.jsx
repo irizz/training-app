@@ -9,22 +9,14 @@ import { Grid, Row, Col } from 'react-bootstrap';
 export const App = () => {
     return (
         <MyProvider>
-            <Grid>
+            <Grid fluid>
                 <Row >
-                    <Col
-                        md={8}
-                        mdOffset={2}
-                        lg={10}
-                        lgOffset={1} >
+                    <Col>
                         <Navigation />
                     </Col>
                 </Row>
                 <Row >
-                    <Col
-                        md={8}
-                        mdOffset={2}
-                        lg={10}
-                        lgOffset={1} >
+                    <Col >
                         <Main />
                     </Col>
                 </Row>

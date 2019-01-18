@@ -177,10 +177,6 @@ export class MyProvider extends React.Component {
         this.setState({ showModal: false });
     }
 
-    handleShowModal = () => {
-        this.setState({ showModal: true });
-    }
-
     render() {
         return (
             <MyContext.Provider value={{
@@ -192,8 +188,7 @@ export class MyProvider extends React.Component {
                 handleContinueBtn: this.handleContinueBtn,
                 runTests: this.runTests,
                 handleSelectTab: this.handleSelectTab,
-                handleCloseModal: this.handleCloseModal,
-                handleShowModal: this.handleShowModal
+                handleCloseModal: this.handleCloseModal
             }}>
                 {this.props.children}
             </MyContext.Provider>

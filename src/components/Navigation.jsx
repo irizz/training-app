@@ -10,7 +10,7 @@ export const Navigation = (props) => {
             <Navbar.Header>
                 <LinkContainer to='/'>
                     <NavbarBrand >
-                        TaskBook
+                        <img src='src/icons/notebook64.png' />
                     </NavbarBrand>
                 </LinkContainer>
             </Navbar.Header>
