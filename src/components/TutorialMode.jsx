@@ -1,25 +1,18 @@
 import React from "react";
-//components
-import { ModesDescription } from "./ModesDescription";
 //style
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
 
-export class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+export class TutorialMode extends React.Component {
   render() {
     return (
       <React.Fragment>
         <Panel>
           <ListGroup>
             <ListGroupItem>
-              <h3>Добро пожаловать в интерактивный задачник JavaScript</h3>
-              <p>Выберите подходящий режим:</p>
+              <h3>Учебник</h3>
             </ListGroupItem>
             <ListGroupItem>
-              <ModesDescription />
+              <p>Описание</p>
             </ListGroupItem>
           </ListGroup>
         </Panel>
