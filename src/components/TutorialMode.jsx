@@ -9,10 +9,10 @@ export class TutorialMode extends React.Component {
         <Panel>
           <ListGroup>
             <ListGroupItem>
-              <h3>Учебник</h3>
+              <h3>Глава</h3>
             </ListGroupItem>
             <ListGroupItem>
-              <p>Описание</p>
+              <p> Теория </p>
             </ListGroupItem>
           </ListGroup>
         </Panel>

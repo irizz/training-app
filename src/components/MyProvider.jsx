@@ -23,7 +23,8 @@ export class MyProvider extends React.Component {
     isBtnDisabled: false,
     defaultOutput: "Результат выполнения кода",
     currentOutputTab: 1,
-    showModal: false
+    showModal: false,
+    testError: ""
   };
 
   //filter tasks by complexity and section checkboxes
@@ -92,11 +93,12 @@ export class MyProvider extends React.Component {
     if (this.state.progressNow < this.state.progressMax - 1) {
       this.clearTestOutput();
       this.setState({
-        currentTask: this.changeTask(this.state.filteredTasks),
+        currentTask: this.incrementTaskIndex(this.state.filteredTasks),
         progressNow: ++this.state.progressNow,
         skipped: ++this.state.skipped,
         defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1
+        currentOutputTab: 1,
+        testError: ''
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
       this.clearTestOutput();
@@ -105,7 +107,8 @@ export class MyProvider extends React.Component {
         skipped: ++this.state.skipped,
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
-        showModal: true
+        showModal: true,
+        testError: ''
       });
     }
   };
@@ -114,12 +117,13 @@ export class MyProvider extends React.Component {
     if (this.state.progressNow < this.state.progressMax - 1) {
       this.clearTestOutput();
       this.setState({
-        currentTask: this.changeTask(this.state.filteredTasks),
+        currentTask: this.incrementTaskIndex(this.state.filteredTasks),
         progressNow: ++this.state.progressNow,
         completed: ++this.state.completed,
         defaultOutput: this.state.defaultOutput,
         isBtnDisabled: false,
-        currentOutputTab: 1
+        currentOutputTab: 1,
+        testError: ''
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
       this.clearTestOutput();
@@ -129,12 +133,13 @@ export class MyProvider extends React.Component {
         defaultOutput: this.state.defaultOutput,
         isBtnDisabled: false,
         currentOutputTab: 1,
-        showModal: true
+        showModal: true,
+        testError: ''
       });
     }
   };
 
-  changeTask = arr => {
+  incrementTaskIndex = arr => {
     let arrEl = this.state.currentTask;
     let arrIndex = arr.indexOf(arrEl);
     let lastIndex = this.state.filteredTasks.length - 1;
@@ -165,7 +170,15 @@ export class MyProvider extends React.Component {
   //test user's solution
   runTests = userCode => {
     let failedTest = 0;
-    window.eval(userCode);
+
+    try {
+      window.eval(userCode);
+    } catch (error) {
+      this.setState({
+        testError: <Alert bsStyle="danger">{error.toString()}</Alert>
+      });
+    }
+
     mocha.setup("bdd");
     let assert = chai.assert;
     eval(this.state.currentTask.test);
@@ -177,6 +190,7 @@ export class MyProvider extends React.Component {
         });
       }
     });
+
     this.setState({
       currentOutputTab: 2,
       isBtnDisabled: !this.state.isBtnDisabled

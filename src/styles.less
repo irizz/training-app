@@ -1,8 +1,19 @@
+body {
+  background-color: rgb(238, 238, 238);
+  font-family: "Roboto", sans-serif;
+}
+h3 {
+  font-family: "Rubik", sans-serif;
+  font-weight: 400;
+}
 button[disabled] {
   cursor: default !important;
 }
-.navbar-default .navbar-brand:hover {
+.navbar-inverse .navbar-brand:hover {
   cursor: pointer;
+}
+#chapters {
+  padding: 0;
 }
 .panel,
 .navbar,
@@ -14,39 +25,31 @@ button[disabled] {
   border-radius: 2px;
 }
 .navbar-brand {
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: -10px !important;
+  padding: 8px;
 }
 .mode-desc-panel {
   border: 0;
 }
 .mode-desc-panel div .panel-title {
-  color: #463d92;
+  color: #514991;
 }
 #accordion-controlled-example-heading-1,
 #accordion-controlled-example-heading-2,
 #accordion-controlled-example-heading-3 {
   padding-left: 0;
-  background-color: white;
+  background-color: transparent;
 }
 .alert {
   margin: 0;
   padding: 5px 10px 5px 10px;
-}
-.CodeMirror {
-  height: 200px;
 }
 .no-padding-panel-body,
 .sandbox-col1,
 .sandbox-col2 {
   padding: 0;
 }
-.sandbox-col2 .panel .panel-body {
-  height: 251px;
+.no-padding-panel-body {
+  height: 352px
 }
 .no-border-panel {
   box-shadow: none;
@@ -68,13 +71,26 @@ button[disabled] {
 
 #controlled-tab-pane-1,
 #controlled-tab-pane-2 {
-  height: 199px;
-  font-size: 13px;
+  height: 210px;
   overflow-y: scroll;
   padding: 15px;
 }
 #controlled-tab .nav {
   background-color: #f5f5f5;
+}
+.CodeMirror {
+  height: 352px
+}
+
+.sandbox-container {
+  height: 405px;
+}
+#description {
+  height: 100px
+}
+
+.panel-default {
+  margin-bottom: 0;
 }
 
 //mocha report styling

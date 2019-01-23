@@ -4,8 +4,7 @@ import { Panel } from "react-bootstrap";
 
 export const Instruction = props => {
   return (
-    <Panel>
-      <Panel.Heading>Описание задачи</Panel.Heading>
+    <Panel id='description'>
       <Panel.Body>{props.description}</Panel.Body>
     </Panel>
   );

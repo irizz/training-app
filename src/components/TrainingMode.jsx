@@ -1,6 +1,5 @@
 import React from "react";
 // components
-import { Instruction } from "./Instruction";
 import { Sandbox } from "./Sandbox";
 import { BtnPanel } from "./BtnPanel";
 import { Progress } from "./Progress";
@@ -18,7 +17,6 @@ export class TrainingMode extends React.Component {
       <MyContext.Consumer>
         {context => (
           <React.Fragment>
-            <Instruction description={context.state.currentTask.description} />
             <Sandbox
               preCode={context.state.currentTask.preCode}
               codeReturn={context.state.currentTask.codeReturn}
