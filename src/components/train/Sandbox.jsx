@@ -1,11 +1,10 @@
 import React from "react";
 //components
-import { Instruction } from "./Instruction";
 import { Output } from "./Output";
 //overwritten console methods
-import { ConsoleMethods } from "../ConsoleMethods";
+import { ConsoleMethods } from "../../ConsoleMethods";
 //context
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 //style
 import {
   Col,
@@ -85,10 +84,10 @@ export class Sandbox extends React.Component {
     return (
       <MyContext.Consumer>
         {context => (
-          <div className="sandbox-container">
-            <Col lg={8} md={8} sm={8} className="sandbox-col2">
+          <div id="sandbox-container">
+            <Col lg={6} md={6} sm={6} id="sandbox-col1">
               <Panel>
-                <Panel.Body className="no-padding-panel-body">
+                <Panel.Body id="codemirror-panel">
                   <CodeMirror
                     value={this.state.code}
                     onBeforeChange={(editor, data, code) => {
@@ -105,7 +104,7 @@ export class Sandbox extends React.Component {
                     <Button
                       bsSize="small"
                       bsStyle="default"
-                      disabled={this.props.isBtnDisabled}
+                      disabled={context.state.isBtnDisabled}
                       onClick={this.executeCode}
                     >
                       Вывести результат
@@ -116,7 +115,7 @@ export class Sandbox extends React.Component {
                       className="right-align-btn"
                       bsSize="small"
                       bsStyle="danger"
-                      disabled={this.props.isBtnDisabled}
+                      disabled={context.state.isBtnDisabled}
                       onClick={this.sendCodeToParent}
                     >
                       Отправить решение
@@ -125,10 +124,10 @@ export class Sandbox extends React.Component {
                 </Panel.Footer>
               </Panel>
             </Col>
-            <Col lg={4} md={4} sm={4} className="sandbox-col1">
-              <Instruction
-                description={context.state.currentTask.description}
-              />
+            <Col lg={6} md={6} sm={6} id="sandbox-col2">
+              <Panel id="description">
+                <Panel.Body>{context.state.currentTask.description}</Panel.Body>
+              </Panel>
               <Output output={this.state.output} />
             </Col>
           </div>

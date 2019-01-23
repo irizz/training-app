@@ -1,12 +1,12 @@
 import React from "react";
 // components
-import { Home } from "./Home";
-import { TutorialModeIntro } from "./TutorialModeIntro";
-import { TutorialMode } from "./TutorialMode";
-import { TrainingModeIntro } from "./TrainingModeIntro";
-import { TrainingMode } from "./TrainingMode";
-import { TestModeIntro } from "./TestModeIntro";
-import { TestMode } from "./TestMode";
+import { Home } from "./home/Home";
+import { TutorialModeIntro } from "./learn/TutorialModeIntro";
+import { TutorialMode } from "./learn/TutorialMode";
+import { TrainingModeIntro } from "./train/TrainingModeIntro";
+import { TrainingMode } from "./train/TrainingMode";
+import { TestModeIntro } from "./test/TestModeIntro";
+import { TestMode } from "./test/TestMode";
 // router
 import { Switch, Route } from "react-router-dom";
 

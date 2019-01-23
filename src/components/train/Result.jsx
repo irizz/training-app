@@ -1,6 +1,6 @@
 import React from "react";
 //context
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 //style
 import { Modal, Button } from "react-bootstrap";
 
@@ -25,16 +25,13 @@ export class Result extends React.Component {
                 Выполнено: {context.state.completed} из{" "}
                 {context.state.progressMax}
               </p>
-              <p>Неправильных: {context.state.failed} </p>
+              <p>Правильно: {context.state.correct} </p>
+              <p>Неправильно: {context.state.failed} </p>
               <p>Пропущено: {context.state.skipped}</p>
               <h3>
                 Ваш результат:{" "}
                 {Math.round(
-                  ((context.state.progressMax -
-                    context.state.failed -
-                    context.state.skipped) /
-                    context.state.progressMax) *
-                    100
+                  (context.state.correct / context.state.progressMax) * 100
                 )}{" "}
                 %
               </h3>

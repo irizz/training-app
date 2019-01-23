@@ -1,6 +1,6 @@
 import React from "react";
 //context
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 // style
 import { Button, Panel, ButtonGroup } from "react-bootstrap";
 
@@ -15,7 +15,7 @@ export const BtnPanel = props => {
                 <Button
                   bsStyle="warning"
                   onClick={context.handleSkipBtn}
-                  disabled={props.isBtnDisabled}
+                  disabled={context.state.isBtnDisabled}
                 >
                   {" "}
                   Пропустить{" "}
@@ -23,7 +23,7 @@ export const BtnPanel = props => {
                 <Button
                   bsStyle="success"
                   onClick={context.handleContinueBtn}
-                  disabled={!props.isBtnDisabled}
+                  disabled={!context.state.isBtnDisabled}
                 >
                   {" "}
                   Продолжить{" "}

@@ -19,10 +19,12 @@ export class MyProvider extends React.Component {
     progressMax: 0,
     completed: 0,
     skipped: 0,
+    correct: 0,
     failed: 0,
     isBtnDisabled: false,
     defaultOutput: "Результат выполнения кода",
     currentOutputTab: 1,
+    outputShadowColor: '',
     showModal: false,
     testError: ""
   };
@@ -78,9 +80,11 @@ export class MyProvider extends React.Component {
   clearPrevSession = () => {
     this.state.complexityArr = [];
     this.state.sectionArr = [];
+   // this.clearTestOutput();
     this.setState({
       completed: 0,
       skipped: 0,
+      correct: 0,
       failed: 0,
       progressNow: 0,
       currentOutputTab: 1,
@@ -98,7 +102,8 @@ export class MyProvider extends React.Component {
         skipped: ++this.state.skipped,
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
-        testError: ''
+        testError: '',
+        outputShadowColor: ''
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
       this.clearTestOutput();
@@ -108,8 +113,13 @@ export class MyProvider extends React.Component {
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
         showModal: true,
-        testError: ''
+        testError: '',
+        outputShadowColor: ''
       });
+    } else if (this.state.progressNow > this.state.progressMax - 1) {
+      this.setState({
+        showModal: true
+      })
     }
   };
 
@@ -123,7 +133,8 @@ export class MyProvider extends React.Component {
         defaultOutput: this.state.defaultOutput,
         isBtnDisabled: false,
         currentOutputTab: 1,
-        testError: ''
+        testError: '',
+        outputShadowColor: ''
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
       this.clearTestOutput();
@@ -134,8 +145,13 @@ export class MyProvider extends React.Component {
         isBtnDisabled: false,
         currentOutputTab: 1,
         showModal: true,
-        testError: ''
+        testError: '',
+        outputShadowColor: ''
       });
+    } else if (this.state.progressNow > this.state.progressMax - 1) {
+      this.setState({
+        showModal: true
+      })
     }
   };
 
@@ -160,6 +176,9 @@ export class MyProvider extends React.Component {
     document.getElementById("mocha").innerHTML = "";
     mocha.suite.suites = [];
     console.clear();
+    this.setState({
+      outputShadowColor: ''
+    })
   };
 
   //change tab in Output component
@@ -186,8 +205,16 @@ export class MyProvider extends React.Component {
       if (failedTest == 0) {
         ++failedTest;
         this.setState({
-          failed: ++this.state.failed
+          failed: ++this.state.failed,
+          outputShadowColor: 'output-shadow-red'
         });
+      }
+    }).on("pass", () => {
+      if (failedTest == 0) {
+        this.setState({
+          correct: ++this.state.correct,
+          outputShadowColor: 'output-shadow-green'
+        })
       }
     });
 

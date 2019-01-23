@@ -1,6 +1,6 @@
 import React from "react";
 //context
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 //style
 import {
   Panel,
@@ -14,15 +14,13 @@ import {
 export const Output = props => {
 
   const tooltip3 = (
-    <Tooltip id="tooltip">
-      Очистить панель вывода и результаты тестов
-    </Tooltip>
+    <Tooltip id="tooltip">Очистить панель вывода и результаты тестов</Tooltip>
   );
-
+  
   return (
     <MyContext.Consumer>
       {context => (
-        <Panel>
+        <Panel >
           <Tabs
             id="controlled-tab"
             activeKey={context.state.currentOutputTab}
@@ -32,7 +30,7 @@ export const Output = props => {
             <Tab eventKey={1} title="Вывод">
               <div id="consoleOutput">{props.output}</div>
             </Tab>
-            <Tab eventKey={2} title="Тест">
+            <Tab eventKey={2} title="Тест" className={context.state.outputShadowColor} >
               <p>Результат проверки решения</p>
               <span> {context.state.testError} </span>
               <div id="mocha" />
@@ -40,11 +38,7 @@ export const Output = props => {
           </Tabs>
           <Panel.Footer>
             <OverlayTrigger placement="right" overlay={tooltip3}>
-              <Button
-                bsSize="small"
-                className="clear-btn"
-                onClick={context.clearTestOutput}
-              >
+              <Button bsSize="small" onClick={context.clearTestOutput}>
                 {" "}
                 Очистить{" "}
               </Button>

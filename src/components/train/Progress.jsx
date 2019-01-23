@@ -1,6 +1,6 @@
 import React from "react";
 //context
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 //style
 import { ProgressBar } from "react-bootstrap";
 

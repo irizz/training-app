@@ -5,7 +5,7 @@ import { BtnPanel } from "./BtnPanel";
 import { Progress } from "./Progress";
 import { Result } from "./Result";
 //context
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 
 export class TrainingMode extends React.Component {
   constructor(props) {
@@ -22,9 +22,8 @@ export class TrainingMode extends React.Component {
               codeReturn={context.state.currentTask.codeReturn}
               defaultOutput={context.state.defaultOutput}
               sendCodeToParent={context.runTests}
-              isBtnDisabled={context.state.isBtnDisabled}
             />
-            <BtnPanel isBtnDisabled={context.state.isBtnDisabled} />
+            <BtnPanel />
             <Progress />
             <Result />
           </React.Fragment>
