@@ -24,7 +24,7 @@ export class MyProvider extends React.Component {
     isBtnDisabled: false,
     defaultOutput: "Результат выполнения кода",
     currentOutputTab: 1,
-    outputShadowColor: '',
+    outputShadowColor: "",
     showModal: false,
     testError: ""
   };
@@ -55,15 +55,49 @@ export class MyProvider extends React.Component {
   handleStartClick = () => {
     event.preventDefault();
 
-    this.state.filteredTasks = Tasks.filter(
-      task =>
-        this.state.complexityArr.indexOf(task.complexity) != -1 &&
-        this.state.sectionArr.indexOf(task.section) != -1
-    );
+    //in case if separate filter was chosen
+    if (
+      this.state.complexityArr[0] == undefined &&
+      this.state.sectionArr[0] != undefined
+    ) {
+      this.state.filteredTasks = Tasks.filter(
+        task => this.state.sectionArr.indexOf(task.section) != -1
+      );
+    } else if (
+      this.state.sectionArr[0] == undefined &&
+      this.state.complexityArr[0] != undefined
+    ) {
+      this.state.filteredTasks = Tasks.filter(
+        task => this.state.complexityArr.indexOf(task.complexity) != -1
+      );
+    } else {
+      this.state.filteredTasks = Tasks.filter(
+        task =>
+          this.state.complexityArr.indexOf(task.complexity) != -1 &&
+          this.state.sectionArr.indexOf(task.section) != -1
+      );
+    }
 
-    this.clearPrevSession();
-
-    if (this.state.filteredTasks[0] === undefined) {
+    //in case if no filter criteria was chosen OR tasks with chosen criterias are absent
+    if (
+      (this.state.filteredTasks[0] == undefined &&
+        this.state.complexityArr[0] != undefined) ||
+      (this.state.filteredTasks[0] == undefined &&
+        this.state.sectionArr[0] != undefined)
+    ) {
+      alert(
+        "Не удалось найти задачи с выбранными критериями. Будут отображены все задачи, присутствующие в базе."
+      );
+      this.setState({
+        filteredTasks: Tasks,
+        progressMax: Tasks.length,
+        currentTask: Tasks[0]
+      });
+    } else if (
+      this.state.filteredTasks[0] == undefined &&
+      this.state.complexityArr[0] == undefined &&
+      this.state.sectionArr[0] == undefined
+    ) {
       this.setState({
         filteredTasks: Tasks,
         progressMax: Tasks.length,
@@ -75,12 +109,14 @@ export class MyProvider extends React.Component {
         progressMax: this.state.filteredTasks.length
       });
     }
+
+    this.clearPrevSession();
   };
 
   clearPrevSession = () => {
     this.state.complexityArr = [];
     this.state.sectionArr = [];
-   // this.clearTestOutput();
+    // this.clearTestOutput();
     this.setState({
       completed: 0,
       skipped: 0,
@@ -102,8 +138,8 @@ export class MyProvider extends React.Component {
         skipped: ++this.state.skipped,
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
-        testError: '',
-        outputShadowColor: ''
+        testError: "",
+        outputShadowColor: ""
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
       this.clearTestOutput();
@@ -113,13 +149,13 @@ export class MyProvider extends React.Component {
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
         showModal: true,
-        testError: '',
-        outputShadowColor: ''
+        testError: "",
+        outputShadowColor: ""
       });
     } else if (this.state.progressNow > this.state.progressMax - 1) {
       this.setState({
         showModal: true
-      })
+      });
     }
   };
 
@@ -133,8 +169,8 @@ export class MyProvider extends React.Component {
         defaultOutput: this.state.defaultOutput,
         isBtnDisabled: false,
         currentOutputTab: 1,
-        testError: '',
-        outputShadowColor: ''
+        testError: "",
+        outputShadowColor: ""
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
       this.clearTestOutput();
@@ -145,13 +181,13 @@ export class MyProvider extends React.Component {
         isBtnDisabled: false,
         currentOutputTab: 1,
         showModal: true,
-        testError: '',
-        outputShadowColor: ''
+        testError: "",
+        outputShadowColor: ""
       });
     } else if (this.state.progressNow > this.state.progressMax - 1) {
       this.setState({
         showModal: true
-      })
+      });
     }
   };
 
@@ -177,8 +213,8 @@ export class MyProvider extends React.Component {
     mocha.suite.suites = [];
     console.clear();
     this.setState({
-      outputShadowColor: ''
-    })
+      outputShadowColor: ""
+    });
   };
 
   //change tab in Output component
@@ -201,22 +237,25 @@ export class MyProvider extends React.Component {
     mocha.setup("bdd");
     let assert = chai.assert;
     eval(this.state.currentTask.test);
-    mocha.run().on("fail", () => {
-      if (failedTest == 0) {
-        ++failedTest;
-        this.setState({
-          failed: ++this.state.failed,
-          outputShadowColor: 'output-shadow-red'
-        });
-      }
-    }).on("pass", () => {
-      if (failedTest == 0) {
-        this.setState({
-          correct: ++this.state.correct,
-          outputShadowColor: 'output-shadow-green'
-        })
-      }
-    });
+    mocha
+      .run()
+      .on("fail", () => {
+        if (failedTest == 0) {
+          ++failedTest;
+          this.setState({
+            failed: ++this.state.failed,
+            outputShadowColor: "output-shadow-red"
+          });
+        }
+      })
+      .on("pass", () => {
+        if (failedTest == 0) {
+          this.setState({
+            correct: ++this.state.correct,
+            outputShadowColor: "output-shadow-green"
+          });
+        }
+      });
 
     this.setState({
       currentOutputTab: 2,

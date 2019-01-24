@@ -27,8 +27,8 @@ export class TrainingModeIntro extends React.Component {
                 или тем.
               </p>
               <p>
-                При отсутствии выбранных критериев будут отображены{" "}
-                <strong>все задачи</strong>, присутствующие в базе.
+                Чтобы отобразить <strong>все задачи</strong>, присутствующие в базе, можно
+                пропустить выбор критериев.
               </p>
             </ListGroupItem>
             <ListGroupItem>
