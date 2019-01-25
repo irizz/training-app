@@ -33,11 +33,13 @@ export class Sandbox extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      code: nextProps.preCode,
-      codeReturn: nextProps.codeReturn,
-      output: nextProps.defaultOutput
-    });
+    if(this.props.preCode != nextProps.preCode) {
+      this.setState({
+        code: nextProps.preCode,
+        codeReturn: nextProps.codeReturn,
+        output: nextProps.defaultOutput
+      });
+    }
   }
 
   sendCodeToParent = () => {
@@ -58,9 +60,8 @@ export class Sandbox extends React.Component {
         });
       }
     } catch (error) {
-      const errorText = error.toString();
       this.setState({
-        output: <Alert bsStyle="danger">{errorText}</Alert>
+        output: <Alert bsStyle="danger">{error.toString()}</Alert>
       });
     }
   };

@@ -14,7 +14,7 @@ export const ConsoleMethods = () => {
   const originalClear = console.clear;
 
   console.error = function(error) {
-    add(error.toString() + error.stack);
+    add(error.toString());
     originalError.apply(console, arguments);
   };
   console.log = function(...args) {

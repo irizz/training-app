@@ -14,7 +14,7 @@ export class Result extends React.Component {
       <MyContext.Consumer>
         {context => (
           <Modal
-            show={context.state.showModal}
+            show={context.state.showResultModal}
             onHide={context.handleCloseModal}
           >
             <Modal.Header closeButton>

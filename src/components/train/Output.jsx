@@ -12,15 +12,14 @@ import {
 } from "react-bootstrap";
 
 export const Output = props => {
-
   const tooltip3 = (
     <Tooltip id="tooltip">Очистить панель вывода и результаты тестов</Tooltip>
   );
-  
+
   return (
     <MyContext.Consumer>
       {context => (
-        <Panel >
+        <Panel>
           <Tabs
             id="controlled-tab"
             activeKey={context.state.currentOutputTab}
@@ -28,9 +27,14 @@ export const Output = props => {
             animation={false}
           >
             <Tab eventKey={1} title="Вывод">
-              <div id="consoleOutput">{props.output}</div>
+              <div>{props.output}</div>
+              <div id="consoleOutput" />
             </Tab>
-            <Tab eventKey={2} title="Тест" className={context.state.outputShadowColor} >
+            <Tab
+              eventKey={2}
+              title="Тест"
+              className={context.state.outputShadowColor}
+            >
               <p>Результат проверки решения</p>
               <span> {context.state.testError} </span>
               <div id="mocha" />

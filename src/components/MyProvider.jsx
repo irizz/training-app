@@ -25,11 +25,10 @@ export class MyProvider extends React.Component {
     defaultOutput: "Результат выполнения кода",
     currentOutputTab: 1,
     outputShadowColor: "",
-    showModal: false,
+    showResultModal: false,
     testError: ""
   };
 
-  //filter tasks by complexity and section checkboxes
   handleComplexityCheck = () => {
     if (this.state.complexityArr.indexOf(event.target.value) == -1) {
       this.state.complexityArr.push(event.target.value);
@@ -55,8 +54,8 @@ export class MyProvider extends React.Component {
   handleStartClick = () => {
     event.preventDefault();
 
-    //in case if separate filter was chosen
     if (
+      //in case if only one filter was chosen
       this.state.complexityArr[0] == undefined &&
       this.state.sectionArr[0] != undefined
     ) {
@@ -64,6 +63,7 @@ export class MyProvider extends React.Component {
         task => this.state.sectionArr.indexOf(task.section) != -1
       );
     } else if (
+      //same, but other filter
       this.state.sectionArr[0] == undefined &&
       this.state.complexityArr[0] != undefined
     ) {
@@ -71,6 +71,7 @@ export class MyProvider extends React.Component {
         task => this.state.complexityArr.indexOf(task.complexity) != -1
       );
     } else {
+      // if both filters were clicked
       this.state.filteredTasks = Tasks.filter(
         task =>
           this.state.complexityArr.indexOf(task.complexity) != -1 &&
@@ -78,8 +79,8 @@ export class MyProvider extends React.Component {
       );
     }
 
-    //in case if no filter criteria was chosen OR tasks with chosen criterias are absent
     if (
+      //if one or both filters were chosen, but there's not a single task with such criterias
       (this.state.filteredTasks[0] == undefined &&
         this.state.complexityArr[0] != undefined) ||
       (this.state.filteredTasks[0] == undefined &&
@@ -94,6 +95,7 @@ export class MyProvider extends React.Component {
         currentTask: Tasks[0]
       });
     } else if (
+      // if user didn't choose any criteria and wants to see all tasks
       this.state.filteredTasks[0] == undefined &&
       this.state.complexityArr[0] == undefined &&
       this.state.sectionArr[0] == undefined
@@ -104,6 +106,7 @@ export class MyProvider extends React.Component {
         currentTask: Tasks[0]
       });
     } else {
+      // if criterias were chosen and there are tasks with such criterias
       this.setState({
         currentTask: this.state.filteredTasks[0],
         progressMax: this.state.filteredTasks.length
@@ -116,7 +119,6 @@ export class MyProvider extends React.Component {
   clearPrevSession = () => {
     this.state.complexityArr = [];
     this.state.sectionArr = [];
-    // this.clearTestOutput();
     this.setState({
       completed: 0,
       skipped: 0,
@@ -128,10 +130,9 @@ export class MyProvider extends React.Component {
     });
   };
 
-  //handle button clicks in BtnPanel component
   handleSkipBtn = () => {
+    this.clearTestOutput();
     if (this.state.progressNow < this.state.progressMax - 1) {
-      this.clearTestOutput();
       this.setState({
         currentTask: this.incrementTaskIndex(this.state.filteredTasks),
         progressNow: ++this.state.progressNow,
@@ -142,26 +143,25 @@ export class MyProvider extends React.Component {
         outputShadowColor: ""
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
-      this.clearTestOutput();
       this.setState({
         progressNow: ++this.state.progressNow,
         skipped: ++this.state.skipped,
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
-        showModal: true,
+        showResultModal: true,
         testError: "",
         outputShadowColor: ""
       });
     } else if (this.state.progressNow > this.state.progressMax - 1) {
       this.setState({
-        showModal: true
+        showResultModal: true
       });
     }
   };
 
   handleContinueBtn = () => {
+    this.clearTestOutput();
     if (this.state.progressNow < this.state.progressMax - 1) {
-      this.clearTestOutput();
       this.setState({
         currentTask: this.incrementTaskIndex(this.state.filteredTasks),
         progressNow: ++this.state.progressNow,
@@ -173,20 +173,19 @@ export class MyProvider extends React.Component {
         outputShadowColor: ""
       });
     } else if (this.state.progressNow == this.state.progressMax - 1) {
-      this.clearTestOutput();
       this.setState({
         progressNow: ++this.state.progressNow,
         completed: ++this.state.completed,
         defaultOutput: this.state.defaultOutput,
         isBtnDisabled: false,
         currentOutputTab: 1,
-        showModal: true,
+        showResultModal: true,
         testError: "",
         outputShadowColor: ""
       });
     } else if (this.state.progressNow > this.state.progressMax - 1) {
       this.setState({
-        showModal: true
+        showResultModal: true
       });
     }
   };
@@ -208,6 +207,8 @@ export class MyProvider extends React.Component {
     }
   };
 
+  decrementTaskIndex = arr => {};
+
   clearTestOutput = () => {
     document.getElementById("mocha").innerHTML = "";
     mocha.suite.suites = [];
@@ -217,14 +218,9 @@ export class MyProvider extends React.Component {
     });
   };
 
-  //change tab in Output component
-  handleSelectTab = key => {
-    this.setState({ currentOutputTab: key });
-  };
-
-  //test user's solution
   runTests = userCode => {
     let failedTest = 0;
+    let correctTest = 0;
 
     try {
       window.eval(userCode);
@@ -249,7 +245,8 @@ export class MyProvider extends React.Component {
         }
       })
       .on("pass", () => {
-        if (failedTest == 0) {
+        if (failedTest == 0 && correctTest == 0) {
+          ++correctTest;
           this.setState({
             correct: ++this.state.correct,
             outputShadowColor: "output-shadow-green"
@@ -263,9 +260,12 @@ export class MyProvider extends React.Component {
     });
   };
 
-  //close modal window with results
+  handleSelectTab = key => {
+    this.setState({ currentOutputTab: key });
+  };
+
   handleCloseModal = () => {
-    this.setState({ showModal: false });
+    this.setState({ showResultModal: false });
   };
 
   render() {
