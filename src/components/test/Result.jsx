@@ -27,7 +27,6 @@ export class Result extends React.Component {
               </p>
               <p>Правильно: {context.state.correct} </p>
               <p>Неправильно: {context.state.failed} </p>
-              <p>Пропущено: {context.state.skipped}</p>
               <h3>
                 Ваш результат:{" "}
                 {Math.round(

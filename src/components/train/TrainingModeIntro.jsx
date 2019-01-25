@@ -1,6 +1,8 @@
 import React from "react";
 //components
 import { TasksSelection } from "./TasksSelection";
+//context
+import { MyContext } from "../MyProvider";
 //style
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
 

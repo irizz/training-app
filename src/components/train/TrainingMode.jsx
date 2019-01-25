@@ -1,11 +1,11 @@
 import React from "react";
 // components
 import { Sandbox } from "./Sandbox";
-import { BtnPanel } from "./BtnPanel";
 import { Progress } from "./Progress";
-import { Result } from "./Result";
 //context
 import { MyContext } from "../MyProvider";
+//style
+import { Pager } from "react-bootstrap";
 
 export class TrainingMode extends React.Component {
   constructor(props) {
@@ -23,9 +23,16 @@ export class TrainingMode extends React.Component {
               defaultOutput={context.state.defaultOutput}
               sendCodeToParent={context.runTests}
             />
-            <BtnPanel />
+            <Pager>
+              <Pager.Item previous onClick={context.handlePrevBtn}>
+                {" "}
+                &larr; Предыдущая
+              </Pager.Item>{" "}
+              <Pager.Item next onClick={context.handleNextBtn}>
+                Следующая &rarr;{" "}
+              </Pager.Item>
+            </Pager>
             <Progress />
-            <Result />
           </React.Fragment>
         )}
       </MyContext.Consumer>
