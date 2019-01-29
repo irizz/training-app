@@ -307,6 +307,7 @@ export class MyProvider extends React.Component {
 
     mocha.setup("bdd");
     let assert = chai.assert;
+
     eval(this.state.currentTask.test);
     mocha
       .run()

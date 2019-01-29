@@ -16,7 +16,7 @@ export const App = () => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col lg={10} lgOffset={1} md={10} mdOffset={1}>
             <MyRouter />
           </Col>
         </Row>

@@ -10,17 +10,19 @@ function sum(a,b) {
     //напишите тело функции
 }`,
     codeReturn: "; return(sum(a,b));",
-    test: `describe("sum", function () {              
-                it("выводит сумму 2 и 5 ", function () {
-                    assert.equal(sum(2, 5), 7);
-                }); 
-                it("выводит сумму 20 и 10 ", function () {
-                    assert.equal(sum(20, 10), 30);
-                }); 
-                it("тип данных sum - функция", function () {
-                    assert.typeOf(sum, 'function');
-                });
-            })`
+    test: `describe("sum", function() {
+        function sumTest(a,b) {
+          let expected = a + b;
+          it('при а = ' + a + ' и b = ' + b + ', сумма = ' + expected , function() {
+            assert.equal(sum(a,b), expected);
+        });
+      }
+      for(let a = 1; a <= 3; a++) {
+        for(let b=1; b <= 2; b++) {
+          sumTest(a,b);
+        }
+      }
+    });`
   },
   {
     id: 2,
@@ -33,23 +35,32 @@ function isEven(num) {
 	//напишите тело функции
 }`,
     codeReturn: "; return(isEven(num));",
-    test: `describe("isEven", function () {
-                it("2 - чётное", function () {
-                    assert.equal(isEven(2), true);
-                });
-                it("1 - нечётное", function () {
-                    assert.equal(isEven(1), false);
-                });
-                it("тип возвращаемого значения - boolean", function() {
-                let result;
-                function isEvenResult(){
-                    result = isEven();
-                    return result;
-                };
-                isEvenResult();
-                assert.typeOf(result, 'boolean' )
-                })
-            })`
+    test: `describe("isEven", function() {
+        function isEvenTest(num) {
+          let expected;
+          if (num % 2 == 0) {
+            expected = true;
+          } else {
+            expected = false;
+          }
+          it("при num = " + num + " вернуть " + expected, function() {
+            assert.equal(isEven(num), expected);
+          });
+        };
+        for (let num = 1; num <= 5 ; num++) {
+          isEvenTest(num);
+        };
+  
+        it("тип возвращаемого значения - boolean", function() {
+          let result;
+          function isEvenResult() {
+            result = isEven();
+            return result;
+          }
+          isEvenResult();
+          assert.typeOf(result, "boolean");
+        });
+      });`
   },
   {
     id: 3,
@@ -65,16 +76,63 @@ console.log(fn()); //1
 console.log(fn()); //2
 console.log(fn()); //3 `,
     codeReturn: "",
-    test: ""
+    test: `describe('fn', function() {
+        let fn = counter();
+        function counterTest() {
+          let count = 1;
+          return function() {
+            return count++
+          };
+        }
+        let fun = counterTest();
+        let res1 = fun();
+        let res2 = fun();
+        let res3 = fun();
+        it("1-й вызов функции возвращает " + res1, function() {
+          assert.equal(fn(), res1);
+        });
+        it("2-й вызов функции возвращает " + res2, function() {
+          assert.equal(fn(), res2);
+        });
+        it("3-й вызов функции возвращает " + res3, function() {
+          assert.equal(fn(), res3);
+        });
+      })`
   },
   {
     id: 4,
-    complexity: "advanced",
-    section: "dom",
-    description:
-      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-    preCode: `//some code`,
-    codeReturn: "",
+    complexity: "basic",
+    section: "basic-2",
+    description: "Напишите функцию min, принимающую два аргумента, и возвращающую минимальный из них.",
+    preCode: 
+`function min(a,b) {
+  //напишите тело функции
+}`,
+    codeReturn: "; return (min(a,b));",
+    test: ``
+  },
+  {
+    id: 5,
+    complexity: "basic",
+    section: "basic-2",
+    description: "Напишите функцию countChar, которая принимает строку и символ в качестве аргумента, и возвращает количество символов, содержащихся в строке.",
+    preCode: 
+`function countChar(string,symbol) {
+  //напишите тело функции
+}`,
+    codeReturn: "; return (countChar(string,symbol));",
+    test: ``
+  },
+  {
+    id: 6,
+    complexity: "basic",
+    section: "basic-2",
+    description: "Напишите функцию range, принимающую два аргумента, начало и конец диапазона, и возвращающую массив, который содержит все числа из него, включая начальное и конечное.",
+    preCode: 
+`function range(start,end) {
+  //напишите тело функции
+}`,
+    codeReturn: "; return (range(start,end));",
     test: ``
   }
 ];
