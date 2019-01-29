@@ -109,7 +109,22 @@ console.log(fn()); //3 `,
   //напишите тело функции
 }`,
     codeReturn: "; return (min(a,b));",
-    test: ``
+    test: `describe('min', function() {
+      function minTest(a,b) {
+        let res;
+        (a-b) < 0 ?
+        res = a :
+        res = b;
+        it('при a = ' + a + ' и b = ' + b + ', меньшее ' + res, function() {
+          assert.equal(min(a,b), res);
+        });
+      }
+    for(let a = -1; a <= 2; a++) {
+      for(let b = -1; b <= 1; b++) {
+        minTest(a,b);
+      }
+    }
+  });`
   },
   {
     id: 5,
@@ -121,7 +136,24 @@ console.log(fn()); //3 `,
   //напишите тело функции
 }`,
     codeReturn: "; return (countChar(string,symbol));",
-    test: ``
+    test: `describe('countChar', function() {
+      function countCharTest(string,symbol) {
+        let res = 0;
+        for(let i=0; i<string.length; i++) {
+          if(string.charAt(i) == symbol) {
+            res++
+          }
+        }
+        it('количество символов "' + symbol + '" в строке "' + string + '" равно ' + res, function() {
+          assert.equal(countChar(string,symbol), res);
+        });
+      }
+      countCharTest('I love cookies', 'o');
+      countCharTest('I love cookies', ' ');
+      countCharTest('8-800-555-35-35', '5');
+      countCharTest('8-800-555-35-35', '-');
+    
+  });`
   },
   {
     id: 6,
@@ -133,6 +165,26 @@ console.log(fn()); //3 `,
   //напишите тело функции
 }`,
     codeReturn: "; return (range(start,end));",
-    test: ``
+    test: `describe('range', function() {
+      function rangeTest(start,end) {
+        let arr = [];
+        if (end - start > 0) {
+          for(let i=start; i<end+1; i++) {
+            arr.push(i);
+          }
+        } else {
+          for(let i = end; i< start+1; i++) {
+            arr.unshift(i);
+          }
+        }
+        it('при start равном ' + start + ' и end равном ' + end + ', результат равен [' + arr + ']', function() {
+          assert.sameOrderedMembers(range(start,end), arr);
+        });
+      }
+      rangeTest(-1,5);
+      rangeTest(5, 0);
+      rangeTest(100, 96);
+      rangeTest(12, 15);  
+  });`
   }
 ];

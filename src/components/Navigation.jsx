@@ -47,6 +47,11 @@ export const Navigation = props => {
                     Тестирование
                   </NavItem>
                 </LinkContainer>
+                <LinkContainer to="/links">
+                  <NavItem>
+                    Полезные ссылки
+                  </NavItem>
+                </LinkContainer>
               </Nav>
             </Col>
           </Row>

@@ -215,7 +215,7 @@ export class MyProvider extends React.Component {
 
   handlePrevBtn = () => {
     this.clearTestOutput();
-    if (this.state.progressNow > 0) {
+    if (this.state.progressNow > 0 && this.state.progressNow < this.state.progressMax) {
       this.setState({
         currentTask: this.decrementTaskIndex(this.state.filteredTasks),
         progressNow: --this.state.progressNow,
@@ -224,7 +224,22 @@ export class MyProvider extends React.Component {
         testError: "",
         outputShadowColor: ""
       });
-    }
+    } else if (this.state.progressNow == this.state.progressMax) {
+      this.setState({
+        progressNow: --this.state.progressNow,
+        defaultOutput: this.state.defaultOutput,
+        currentOutputTab: 1,
+        testError: "",
+        outputShadowColor: ""
+      })
+    } else {
+      this.setState({
+        defaultOutput: this.state.defaultOutput,
+        currentOutputTab: 1,
+        testError: "",
+        outputShadowColor: ""
+      });
+    } 
   };
 
   handleNextBtn = () => {
@@ -307,8 +322,8 @@ export class MyProvider extends React.Component {
 
     mocha.setup("bdd");
     let assert = chai.assert;
-
     eval(this.state.currentTask.test);
+
     mocha
       .run()
       .on("fail", () => {
