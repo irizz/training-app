@@ -27,7 +27,9 @@ export class MyProvider extends React.Component {
     outputShadowColor: "",
     showResultModal: false,
     testError: "",
-    currentMode: ""
+    currentMode: "",
+    isBtnPanelHidden: false,
+    isFinishBtnHidden: true
   };
 
   handleComplexityCheck = () => {
@@ -149,7 +151,9 @@ export class MyProvider extends React.Component {
       failed: 0,
       progressNow: 0,
       currentOutputTab: 1,
-      isBtnDisabled: false
+      isBtnDisabled: false,
+      isBtnPanelHidden: false,
+      isFinishBtnHidden: true
     });
   };
 
@@ -173,7 +177,9 @@ export class MyProvider extends React.Component {
         currentOutputTab: 1,
         showResultModal: true,
         testError: "",
-        outputShadowColor: ""
+        outputShadowColor: "",
+        isBtnPanelHidden: true,
+        isFinishBtnHidden: false
       });
     } else if (this.state.progressNow > this.state.progressMax - 1) {
       this.setState({
@@ -204,7 +210,9 @@ export class MyProvider extends React.Component {
         currentOutputTab: 1,
         showResultModal: true,
         testError: "",
-        outputShadowColor: ""
+        outputShadowColor: "",
+        isBtnPanelHidden: true,
+        isFinishBtnHidden: false
       });
     } else if (this.state.progressNow > this.state.progressMax - 1) {
       this.setState({
@@ -215,7 +223,10 @@ export class MyProvider extends React.Component {
 
   handlePrevBtn = () => {
     this.clearTestOutput();
-    if (this.state.progressNow > 0 && this.state.progressNow < this.state.progressMax) {
+    if (
+      this.state.progressNow > 0 &&
+      this.state.progressNow < this.state.progressMax
+    ) {
       this.setState({
         currentTask: this.decrementTaskIndex(this.state.filteredTasks),
         progressNow: --this.state.progressNow,
@@ -231,7 +242,7 @@ export class MyProvider extends React.Component {
         currentOutputTab: 1,
         testError: "",
         outputShadowColor: ""
-      })
+      });
     } else {
       this.setState({
         defaultOutput: this.state.defaultOutput,
@@ -239,7 +250,7 @@ export class MyProvider extends React.Component {
         testError: "",
         outputShadowColor: ""
       });
-    } 
+    }
   };
 
   handleNextBtn = () => {
@@ -259,7 +270,9 @@ export class MyProvider extends React.Component {
         defaultOutput: this.state.defaultOutput,
         currentOutputTab: 1,
         testError: "",
-        outputShadowColor: ""
+        outputShadowColor: "",
+        isBtnPanelHidden: true,
+        isFinishBtnHidden: false
       });
     }
   };
