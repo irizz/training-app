@@ -7,7 +7,6 @@ import { TrainingModeIntro } from "./train/TrainingModeIntro";
 import { TrainingMode } from "./train/TrainingMode";
 import { TestModeIntro } from "./test/TestModeIntro";
 import { TestMode } from "./test/TestMode";
-import { UsefulLinks } from "./UsefulLinks";
 // router
 import { Switch, Route } from "react-router-dom";
 
@@ -22,7 +21,6 @@ export const MyRouter = () => {
         <Route path="/train/session" component={TrainingMode} />
         <Route exact path="/test" component={TestModeIntro} />
         <Route path="/test/session" component={TestMode} />
-        <Route path="/links" component={UsefulLinks} />
       </Switch>
     </React.Fragment>
   );
