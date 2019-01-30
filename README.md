@@ -13,3 +13,6 @@
 <a href="https://codemirror.net/">CodeMirror</a>, 
 <a href="https://mochajs.org/">Mocha</a>,
 <a href="https://www.chaijs.com/">Chai</a>.</p>
+<br/>
+<br/>
+<p>Список задач будет пополняться.</p>
