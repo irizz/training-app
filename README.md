@@ -13,6 +13,8 @@
 <a href="https://codemirror.net/">CodeMirror</a>, 
 <a href="https://mochajs.org/">Mocha</a>,
 <a href="https://www.chaijs.com/">Chai</a>.</p>
-<br/>
+<br />
+<p>
+Изображения предоставлены https://www.flaticon.com/. Авторы: <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>, <a href="https://www.flaticon.com/authors/zlatko-najdenovski">Zlatko Najdenovski</a>, <a href="https://www.flaticon.com/authors/elias-bikbulatov">Elias Bikbulatov</a>. </p>
 <br/>
 <p>Список задач будет пополняться.</p>
