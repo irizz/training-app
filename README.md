@@ -7,7 +7,7 @@
 - Тренировка (можно исправлять решение и выбирать тему/сложность заданий)
 - Тестирование (определённый набор заданий, исправлять решение нельзя, в конце выводится результат)
 
-Использованы библиотеки:
+Использованы фреймворки и библиотеки:
 <p>React (включая react-router, <a href="https://react-bootstrap.github.io/">react-bootstrap</a>, 
 <a href="https://github.com/scniro/react-codemirror2">react-codemirror2</a>), 
 <a href="https://codemirror.net/">CodeMirror</a>, 
