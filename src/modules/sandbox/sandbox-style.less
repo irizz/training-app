@@ -1,0 +1,75 @@
+.sandbox {
+  height: 405px;
+
+  &__codemirror {
+    padding: 0;
+    &_panel-body {
+      padding: 0;
+
+      & .CodeMirror {
+        height: 352px;
+      }
+    }
+  }
+
+  &__output {
+    padding: 0;
+    &_description {
+      height: 120px;
+      overflow-y: scroll;
+    }
+  }
+}
+
+.sandbox-output {
+  & .nav {
+    background-color: #f5f5f5;
+  }
+
+  & .tab-content {
+    height: 190px;
+    overflow-y: scroll;
+    padding: 15px;
+  }
+
+  &__test-results {
+    & ul {
+      padding-left: 10px;
+      list-style-type: none;
+    }
+
+    & #mocha-stats {
+      padding-top: 15px;
+
+      & .progress,
+      .duration,
+      .replay {
+        display: none;
+      }
+    }
+
+    & #mocha-report .suite {
+      & h1,
+      h2 {
+        font-size: 13px;
+        margin: 2px;
+
+        & a {
+          pointer-events: none;
+          color: inherit;
+          font-weight: bold;
+        }
+      }
+
+      & ul {
+        padding-left: 18px;
+        list-style-type: circle;
+
+        & .test.fail pre {
+          padding: 5px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

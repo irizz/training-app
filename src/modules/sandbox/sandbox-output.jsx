@@ -10,7 +10,7 @@ import {
 import { MyContext } from "../../provider";
 
 export const SandboxOutput = props => {
-  const tooltip3 = (
+  const tooltip = (
     <Tooltip id="tooltip">Очистить панель вывода и результаты тестов</Tooltip>
   );
 
@@ -19,14 +19,14 @@ export const SandboxOutput = props => {
       {context => (
         <Panel>
           <Tabs
-            id="controlled-tab"
+            className="sandbox-output"
+            id="tabs"
             activeKey={context.state.currentOutputTab}
             onSelect={context.handleSelectTab}
             animation={false}
           >
             <Tab eventKey={1} title="Вывод">
               <div>{props.output}</div>
-              <div id="sandbox-console-output" />
             </Tab>
             <Tab
               eventKey={2}
@@ -35,11 +35,11 @@ export const SandboxOutput = props => {
             >
               <p>Результат проверки решения</p>
               <span> {context.state.testError} </span>
-              <div id="mocha" />
+              <div className="sandbox-output__test-results" id="mocha" />
             </Tab>
           </Tabs>
           <Panel.Footer>
-            <OverlayTrigger placement="right" overlay={tooltip3}>
+            <OverlayTrigger placement="right" overlay={tooltip}>
               <Button bsSize="small" onClick={context.clearTestOutput}>
                 {" "}
                 Очистить{" "}
