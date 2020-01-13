@@ -9,7 +9,13 @@ import {
   Row
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "../MyProvider";
+import {
+  ASSETS_PATH,
+  ROOT_PATH,
+  TEST_INTRO_PAGE_PATH,
+  TRAIN_INTRO_PAGE_PATH
+} from "../../constants";
+import { MyContext } from "../../provider";
 
 export const Navigation = props => {
   return (
@@ -20,18 +26,18 @@ export const Navigation = props => {
             <Col lg={10} lgOffset={1} md={10} mdOffset={1}>
               <Navbar.Header>
                 <NavbarBrand>
-                  <LinkContainer to="/">
-                    <Image src="src/icons/notebook64.png" />
+                  <LinkContainer to={HOME_PAGE_PATH}>
+                    <Image src={ASSETS_DIR_PATH + "notebook64.png"} />
                   </LinkContainer>
                 </NavbarBrand>
               </Navbar.Header>
               <Nav>
-                <LinkContainer to="/train">
+                <LinkContainer to={TRAIN_INTRO_PAGE_PATH}>
                   <NavItem onClick={context.setModeToTraining}>
                     Тренировка
                   </NavItem>
                 </LinkContainer>
-                <LinkContainer to="/test">
+                <LinkContainer to={TEST_INTRO_PAGE_PATH}>
                   <NavItem onClick={context.setModeToTest}>
                     Тестирование
                   </NavItem>
