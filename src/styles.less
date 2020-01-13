@@ -1,4 +1,10 @@
-//fonts
+@import "./modules/sandbox/sandbox-style.less";
+@import "./pages/home-page/home-page-style.less";
+@import "./pages/test-intro-page/test-intro-page-style.less";
+@import "./pages/test-page/test-page-style.less";
+@import "./pages/train-intro-page/train-intro-page-style.less";
+@import "./pages/train-page/train-page-style.less";
+
 body {
   background-color: rgb(233, 233, 233);
   font-family: "Roboto", sans-serif;
@@ -8,13 +14,6 @@ h3 {
   font-weight: 400;
 }
 
-//colors
-.mode-desc-panel div .panel-title {
-  color: #514991;
-}
-#controlled-tab .nav {
-  background-color: #f5f5f5;
-}
 .output-shadow-red {
   box-shadow: 0 0 2px 2px #ce9a99;
 }
@@ -22,18 +21,17 @@ h3 {
   box-shadow: 0 0 2px 2px#9bcf9b;
 }
 
-//grid
 .panel-default {
   margin-bottom: 0;
 }
 .pager {
-  margin: 0px
+  margin: 0px;
 }
 .pager .previous a {
-  margin-left: 5%
+  margin-left: 5%;
 }
 .pager .next a {
-  margin-right: 5%
+  margin-right: 5%;
 }
 .alert {
   margin: 0;
@@ -41,24 +39,9 @@ h3 {
 }
 .navbar-brand {
   padding: 8px;
-  margin-left: 5px !important
-}
-#codemirror-panel,
-#sandbox-col1,
-#sandbox-col2 {
-  padding: 0;
-}
-#accordion-controlled-example-heading-1,
-#accordion-controlled-example-heading-2,
-#accordion-controlled-example-heading-3 {
-  padding-left: 0;
-  background-color: transparent;
-}
-#chapters {
-  padding: 0;
+  margin-left: 5px !important;
 }
 
-//borders
 .panel,
 .navbar,
 .btn,
@@ -69,85 +52,12 @@ h3 {
   border-radius: 2px;
 }
 .panel-group .panel-heading + .panel-collapse .panel-body {
-  border: none
-}
-.no-border-panel {
-  box-shadow: none;
   border: none;
-  margin: 0;
-}
-.mode-desc-panel {
-  border: 0;
 }
 
-//fixed heights
-.CodeMirror {
-  height: 352px;
-}
-#sandbox-container {
-  height: 405px;
-}
-#controlled-tab-pane-1,
-#controlled-tab-pane-2 {
-  height: 190px;
-  overflow-y: scroll;
-  padding: 15px;
-}
-#description {
-  height: 120px;
-  overflow-y: scroll
-}
-
-//button align
-.left-align-img {
-  float: left;
-  margin-right: 15px;
-}
-.right-align-btn {
-  float: right;
-}
-.center-align-btn {
-  margin-left: 35%;
-  margin-right: 35%;
-  width: 30%;
-}
-
-//cursors
 button[disabled] {
   cursor: default !important;
 }
 .navbar-inverse .navbar-brand:hover {
   cursor: pointer;
-}
-
-//mocha report
-#mocha ul {
-  padding-left: 10px;
-  list-style-type: none;
-}
-#mocha-stats {
-  padding-top: 15px;
-}
-#mocha-stats .progress,
-.duration,
-.replay {
-  display: none;
-}
-#mocha-report .suite h1,
-#mocha-report .suite h2 {
-  font-size: 13px;
-  margin: 2px;
-}
-#mocha-report .suite h1 a {
-  pointer-events: none;
-  color: inherit;
-  font-weight: bold;
-}
-#mocha-report .suite ul {
-  padding-left: 18px;
-  list-style-type: circle;
-}
-#mocha-report .suite ul .test.fail pre {
-  padding: 5px;
-  font-size: 12px;
 }
