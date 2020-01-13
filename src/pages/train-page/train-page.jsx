@@ -24,7 +24,7 @@ export class TrainPage extends React.Component {
             />
             <Panel>
               <Panel.Body
-                className="no-border-panel"
+                className="train-button-panel"
                 hidden={context.state.isBtnPanelHidden}
               >
                 <Pager>
@@ -39,7 +39,7 @@ export class TrainPage extends React.Component {
               </Panel.Body>
             </Panel>
             <Panel
-              className="no-border-panel"
+              className="train-button-panel"
               hidden={context.state.isFinishBtnHidden}
             >
               <Panel.Body>
@@ -47,7 +47,7 @@ export class TrainPage extends React.Component {
                   <Button
                     bsSize="large"
                     bsStyle="success"
-                    className="right-align-btn"
+                    className="train-button-panel__button"
                     onClick={context.clearPrevSession}
                   >
                     Завершить

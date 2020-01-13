@@ -2,7 +2,7 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import chai from "chai";
 import "mocha/mocha";
-import { Tasks } from "./tasks";
+import { TASKS } from "./tasks";
 
 export const MyContext = React.createContext();
 
@@ -73,7 +73,7 @@ export class MyProvider extends React.Component {
         this.state.complexityArr[0] == undefined &&
         this.state.sectionArr[0] != undefined
       ) {
-        this.state.filteredTasks = Tasks.filter(
+        this.state.filteredTasks = TASKS.filter(
           task => this.state.sectionArr.indexOf(task.section) != -1
         );
       } else if (
@@ -81,12 +81,12 @@ export class MyProvider extends React.Component {
         this.state.sectionArr[0] == undefined &&
         this.state.complexityArr[0] != undefined
       ) {
-        this.state.filteredTasks = Tasks.filter(
+        this.state.filteredTasks = TASKS.filter(
           task => this.state.complexityArr.indexOf(task.complexity) != -1
         );
       } else {
         // if both filters were clicked
-        this.state.filteredTasks = Tasks.filter(
+        this.state.filteredTasks = TASKS.filter(
           task =>
             this.state.complexityArr.indexOf(task.complexity) != -1 &&
             this.state.sectionArr.indexOf(task.section) != -1
@@ -104,9 +104,9 @@ export class MyProvider extends React.Component {
           "Не удалось найти задачи с выбранными критериями. Будут отображены все задачи, присутствующие в базе."
         );
         this.setState({
-          filteredTasks: Tasks,
-          progressMax: Tasks.length,
-          currentTask: Tasks[0]
+          filteredTasks: TASKS,
+          progressMax: TASKS.length,
+          currentTask: TASKS[0]
         });
       } else if (
         // if user didn't choose any criteria and wants to see all tasks
@@ -115,9 +115,9 @@ export class MyProvider extends React.Component {
         this.state.sectionArr[0] == undefined
       ) {
         this.setState({
-          filteredTasks: Tasks,
-          progressMax: Tasks.length,
-          currentTask: Tasks[0]
+          filteredTasks: TASKS,
+          progressMax: TASKS.length,
+          currentTask: TASKS[0]
         });
       } else {
         // if criterias were chosen and there are tasks with such criterias
@@ -131,9 +131,9 @@ export class MyProvider extends React.Component {
       // TEST MODE
       this.clearPrevSession();
       this.setState({
-        filteredTasks: Tasks,
-        progressMax: Tasks.length,
-        currentTask: Tasks[0]
+        filteredTasks: TASKS,
+        progressMax: TASKS.length,
+        currentTask: TASKS[0]
       });
     }
   };

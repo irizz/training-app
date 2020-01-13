@@ -7,6 +7,8 @@ export class Result extends React.Component {
     super(props);
   }
 
+  calculateResult = (correct, max) => Math.round((correct / max) * 100);
+
   render() {
     return (
       <MyContext.Consumer>
@@ -27,9 +29,10 @@ export class Result extends React.Component {
               <p>Неправильно: {context.state.failed} </p>
               <h3>
                 Ваш результат:{" "}
-                {Math.round(
-                  (context.state.correct / context.state.progressMax) * 100
-                )}{" "}
+                {this.calculateResult(
+                  context.state.correct,
+                  context.state.progressMax
+                )}
                 %
               </h3>
             </Modal.Body>

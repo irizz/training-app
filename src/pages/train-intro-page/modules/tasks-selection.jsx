@@ -7,6 +7,11 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import {
+  TRAIN_PAGE_PATH,
+  COMPLEXITY_VALUES,
+  SECTION_VALUES
+} from "../../../constants";
 import { MyContext } from "../../../provider";
 
 export class TasksSelection extends React.Component {
@@ -22,60 +27,32 @@ export class TasksSelection extends React.Component {
             <Form>
               <ControlLabel>Выберите уровень сложности:</ControlLabel>
               <FormGroup>
-                <Checkbox
-                  inline
-                  value="basic"
-                  onClick={context.handleComplexityCheck}
-                >
-                  Базовый
-                </Checkbox>
-                <Checkbox
-                  inline
-                  value="advanced"
-                  onClick={context.handleComplexityCheck}
-                >
-                  Продвинутый
-                </Checkbox>
-                <Checkbox
-                  inline
-                  value="professional"
-                  onClick={context.handleComplexityCheck}
-                >
-                  Профессионал
-                </Checkbox>
+                {COMPLEXITY_VALUES.map(item => (
+                  <Checkbox
+                    inline
+                    value={item.value}
+                    onClick={context.handleComplexityCheck}
+                  >
+                    {item.header}
+                  </Checkbox>
+                ))}
               </FormGroup>
               <ControlLabel>Выберите одну или несколько тем:</ControlLabel>
               <FormGroup>
-                <Checkbox value="basic-1" onClick={context.handleSectionCheck}>
-                  {" "}
-                  Основы JavaScript: переменные, типы данных, операторы{" "}
-                </Checkbox>
-                <Checkbox value="basic-2" onClick={context.handleSectionCheck}>
-                  {" "}
-                  Основы JavaScript: функции, объекты, массивы, циклы{" "}
-                </Checkbox>
-                <Checkbox value="dom" onClick={context.handleSectionCheck}>
-                  {" "}
-                  Работа с DOM{" "}
-                </Checkbox>
-                <Checkbox value="oop" onClick={context.handleSectionCheck}>
-                  {" "}
-                  ООП в JavaScript{" "}
-                </Checkbox>
-                <Checkbox value="ajax" onClick={context.handleSectionCheck}>
-                  {" "}
-                  AJAX{" "}
-                </Checkbox>
-                <Checkbox value="es6" onClick={context.handleSectionCheck}>
-                  {" "}
-                  Нововведения в ES6{" "}
-                </Checkbox>
+                {SECTION_VALUES.map(item => (
+                  <Checkbox
+                    value={item.value}
+                    onClick={context.handleSectionCheck}
+                  >
+                    {item.header}
+                  </Checkbox>
+                ))}
               </FormGroup>
-              <LinkContainer to="/train/session">
+              <LinkContainer to={TRAIN_PAGE_PATH}>
                 <Button
                   type="submit"
                   bsStyle="primary"
-                  className="center-align-btn"
+                  className="tasks-selection__start-button"
                   onClick={context.handleStartClick}
                 >
                   Начать

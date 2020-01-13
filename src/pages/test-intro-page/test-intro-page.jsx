@@ -17,8 +17,8 @@ export class TestIntroPage extends React.Component {
                 </ListGroupItem>
                 <ListGroupItem>
                   <p>
-                    В данном разделе представлены <strong>N задач</strong> для
-                    определения уровня знаний пользователя.
+                    В этом разделе представлены задачи для определения уровня
+                    знаний пользователя.
                   </p>
                   <p>
                     После ввода решения в специальное поле можно несколько раз
@@ -42,7 +42,7 @@ export class TestIntroPage extends React.Component {
                     <Button
                       type="submit"
                       bsStyle="primary"
-                      className="center-align-btn"
+                      className="test-intro__start-button"
                       onClick={context.handleStartClick}
                     >
                       Начать

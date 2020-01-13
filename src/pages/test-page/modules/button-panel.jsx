@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Panel, ButtonGroup } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { TEST_INTRO_PAGE_PATH } from "../../../constants";
 import { MyContext } from "../../../provider";
 
 export const ButtonPanel = props => {
@@ -9,11 +10,11 @@ export const ButtonPanel = props => {
       {context => (
         <React.Fragment>
           <Panel
-            className="no-border-panel"
+            className="button-panel"
             hidden={context.state.isBtnPanelHidden}
           >
             <Panel.Body>
-              <ButtonGroup className="right-align-btn">
+              <ButtonGroup className="button-panel__button">
                 <Button
                   bsStyle="warning"
                   onClick={context.handleSkipBtn}
@@ -34,15 +35,15 @@ export const ButtonPanel = props => {
             </Panel.Body>
           </Panel>
           <Panel
-            className="no-border-panel"
+            className="button-panel"
             hidden={context.state.isFinishBtnHidden}
           >
             <Panel.Body>
-              <LinkContainer to="/test">
+              <LinkContainer to={TEST_INTRO_PAGE_PATH}>
                 <Button
                   bsSize="large"
                   bsStyle="success"
-                  className="right-align-btn"
+                  className="button-panel__button"
                   onClick={context.clearPrevSession}
                 >
                   Завершить

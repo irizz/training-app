@@ -3,6 +3,7 @@ import { PanelGroup, Panel, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import {
   ASSETS_DIR_PATH,
+  MODES_KEYS,
   TEST_INTRO_PAGE_PATH,
   TRAIN_INTRO_PAGE_PATH
 } from "../../../constants";
@@ -13,7 +14,7 @@ export class ModesDescription extends React.Component {
     super(props);
 
     this.state = {
-      activeKey: "1"
+      activeKey: MODES_KEYS.TRAIN
     };
   }
 
@@ -29,20 +30,21 @@ export class ModesDescription extends React.Component {
         {context => (
           <PanelGroup
             accordion
-            id="accordion-controlled-example"
+            className="modes-description"
             activeKey={activeKey}
             onSelect={this.handleSelect}
           >
-            <Panel eventKey="1" className="mode-desc-panel">
+            <Panel
+              eventKey={MODES_KEYS.TRAIN}
+              className="modes-description__panel"
+            >
               <Panel.Heading>
                 <Panel.Title toggle>Режим тренировки</Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <img
-                  src={ASSETS_DIR_PATH + "/weightlifting.png"}
-                  width="64"
-                  height="64"
-                  className="left-align-img"
+                  src={ASSETS_DIR_PATH + "weightlifting.png"}
+                  className="modes-description__panel_image"
                 />
                 <p>
                   Песочница с заданиями различной сложности и тематики. После
@@ -57,16 +59,17 @@ export class ModesDescription extends React.Component {
                 </LinkContainer>
               </Panel.Body>
             </Panel>
-            <Panel eventKey="2" className="mode-desc-panel">
+            <Panel
+              eventKey={MODES_KEYS.TEST}
+              className="modes-description__panel"
+            >
               <Panel.Heading>
                 <Panel.Title toggle>Режим тестирования</Panel.Title>
               </Panel.Heading>
               <Panel.Body collapsible>
                 <img
                   src={ASSETS_DIR_PATH + "exam.png"}
-                  width="64"
-                  height="64"
-                  className="left-align-img"
+                  className="modes-description__panel_image"
                 />
                 <p>
                   Определённый набор заданий для тестирования уровня знаний
