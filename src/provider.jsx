@@ -2,7 +2,7 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import chai from "chai";
 import "mocha/mocha";
-import { Tasks } from "../Tasks";
+import { Tasks } from "./tasks";
 
 export const MyContext = React.createContext();
 

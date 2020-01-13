@@ -1,7 +1,12 @@
 import React from "react";
 import { PanelGroup, Panel, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "../MyProvider";
+import {
+  ASSETS_DIR_PATH,
+  TEST_INTRO_PAGE_PATH,
+  TRAIN_INTRO_PAGE_PATH
+} from "../../../constants";
+import { MyContext } from "../../../provider";
 
 export class ModesDescription extends React.Component {
   constructor(props) {
@@ -17,13 +22,15 @@ export class ModesDescription extends React.Component {
   };
 
   render() {
+    const { activeKey } = this.state;
+
     return (
       <MyContext.Consumer>
         {context => (
           <PanelGroup
             accordion
             id="accordion-controlled-example"
-            activeKey={this.state.activeKey}
+            activeKey={activeKey}
             onSelect={this.handleSelect}
           >
             <Panel eventKey="1" className="mode-desc-panel">
@@ -32,7 +39,7 @@ export class ModesDescription extends React.Component {
               </Panel.Heading>
               <Panel.Body collapsible>
                 <img
-                  src="src/icons/weightlifting.png"
+                  src={ASSETS_DIR_PATH + "/weightlifting.png"}
                   width="64"
                   height="64"
                   className="left-align-img"
@@ -43,7 +50,7 @@ export class ModesDescription extends React.Component {
                   правильного ответа. Результат выполнения тренировочных заданий
                   не сохраняется.
                 </p>
-                <LinkContainer to="/train">
+                <LinkContainer to={TRAIN_INTRO_PAGE_PATH}>
                   <Button bsSize="small" onClick={context.setModeToTraining}>
                     Перейти
                   </Button>
@@ -56,7 +63,7 @@ export class ModesDescription extends React.Component {
               </Panel.Heading>
               <Panel.Body collapsible>
                 <img
-                  src="src/icons/exam.png"
+                  src={ASSETS_DIR_PATH + "exam.png"}
                   width="64"
                   height="64"
                   className="left-align-img"
@@ -67,7 +74,7 @@ export class ModesDescription extends React.Component {
                   возможности исправления. По окончанию тестирования выводится
                   результат.
                 </p>
-                <LinkContainer to="/test">
+                <LinkContainer to={TEST_INTRO_PAGE_PATH}>
                   <Button bsSize="small" onClick={context.setModeToTest}>
                     Перейти
                   </Button>

@@ -1,11 +1,12 @@
 import React from "react";
 import { Pager, Button, Panel } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "../MyProvider";
-import { Sandbox } from "../sandbox";
-import { Progress } from "./Progress";
+import { Progress } from "../../modules/progress";
+import { Sandbox } from "../../modules/sandbox";
+import { TRAIN_INTRO_PAGE_PATH } from "../../constants";
+import { MyContext } from "../../provider";
 
-export class TrainingMode extends React.Component {
+export class TrainPage extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -42,7 +43,7 @@ export class TrainingMode extends React.Component {
               hidden={context.state.isFinishBtnHidden}
             >
               <Panel.Body>
-                <LinkContainer to="/train">
+                <LinkContainer to={TRAIN_INTRO_PAGE_PATH}>
                   <Button
                     bsSize="large"
                     bsStyle="success"

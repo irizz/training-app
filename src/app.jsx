@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, Row, Col } from "react-bootstrap";
-import { Navigation } from "./navigation";
-import { MyRouter } from "./MyRouter";
-import { MyProvider } from "./MyProvider";
+import { Navigation } from "./modules/navigation";
+import { MyRouter } from "./router";
+import { MyProvider } from "./provider";
 
 export const App = () => {
   return (

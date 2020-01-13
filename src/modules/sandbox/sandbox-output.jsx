@@ -7,9 +7,9 @@ import {
   Tooltip,
   OverlayTrigger
 } from "react-bootstrap";
-import { MyContext } from "../MyProvider";
+import { MyContext } from "../../provider";
 
-export const Output = props => {
+export const SandboxOutput = props => {
   const tooltip3 = (
     <Tooltip id="tooltip">Очистить панель вывода и результаты тестов</Tooltip>
   );

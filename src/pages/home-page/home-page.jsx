@@ -1,8 +1,8 @@
 import React from "react";
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
-import { ModesDescription } from "./ModesDescription";
+import { ModesDescription } from "./modules/modes-description";
 
-export class Home extends React.Component {
+export class HomePage extends React.Component {
   constructor(props) {
     super(props);
   }

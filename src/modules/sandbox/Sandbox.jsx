@@ -12,9 +12,9 @@ import "codemirror/mode/markdown/markdown";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/neo.css";
-import { ConsoleMethods } from "../../ConsoleMethods";
-import { MyContext } from "../MyProvider";
-import { Output } from "./Output";
+import { MyContext } from "../../provider";
+import { ConsoleMethods } from "../../custom-console-methods";
+import { SandboxOutput } from "./sandbox-output";
 
 export class Sandbox extends React.Component {
   constructor(props) {
@@ -124,7 +124,7 @@ export class Sandbox extends React.Component {
               <Panel id="description">
                 <Panel.Body>{context.state.currentTask.description}</Panel.Body>
               </Panel>
-              <Output output={this.state.output} />
+              <SandboxOutput output={this.state.output} />
             </Col>
           </div>
         )}

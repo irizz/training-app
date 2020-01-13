@@ -1,12 +1,12 @@
 import React from "react";
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
-import { MyContext } from "../MyProvider";
-import { Sandbox } from "../sandbox";
-import { Progress } from "../train/Progress";
-import { BtnPanel } from "./BtnPanel";
-import { Result } from "./Result";
+import { Progress } from "../../modules/progress";
+import { Sandbox } from "../../modules/sandbox";
+import { MyContext } from "../../provider";
+import { ButtonPanel } from "./modules/button-panel";
+import { Result } from "./modules/result";
 
-export class TestMode extends React.Component {
+export class TestPage extends React.Component {
   render() {
     return (
       <MyContext.Consumer>
@@ -18,7 +18,7 @@ export class TestMode extends React.Component {
               defaultOutput={context.state.defaultOutput}
               sendCodeToParent={context.runTests}
             />
-            <BtnPanel />
+            <ButtonPanel />
             <Progress />
             <Result />
           </React.Fragment>

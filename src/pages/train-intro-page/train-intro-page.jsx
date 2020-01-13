@@ -1,9 +1,9 @@
 import React from "react";
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
-import { MyContext } from "../MyProvider";
-import { TasksSelection } from "./TasksSelection";
+import { MyContext } from "../../provider";
+import { TasksSelection } from "./modules/tasks-selection";
 
-export class TrainingModeIntro extends React.Component {
+export class TrainIntroPage extends React.Component {
   constructor(props) {
     super(props);
   }

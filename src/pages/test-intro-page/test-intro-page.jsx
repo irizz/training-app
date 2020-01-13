@@ -1,9 +1,10 @@
 import React from "react";
 import { Panel, ListGroup, ListGroupItem, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "../MyProvider";
+import { TEST_PAGE_PATH } from "../../constants";
+import { MyContext } from "../../provider";
 
-export class TestModeIntro extends React.Component {
+export class TestIntroPage extends React.Component {
   render() {
     return (
       <MyContext.Consumer>
@@ -37,7 +38,7 @@ export class TestModeIntro extends React.Component {
                   <p>По окончанию тестирования будет выведен результат.</p>
                 </ListGroupItem>
                 <ListGroupItem>
-                  <LinkContainer to="/test/session">
+                  <LinkContainer to={TEST_PAGE_PATH}>
                     <Button
                       type="submit"
                       bsStyle="primary"

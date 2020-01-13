@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Panel, ButtonGroup } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "../MyProvider";
+import { MyContext } from "../../../provider";
 
-export const BtnPanel = props => {
+export const ButtonPanel = props => {
   return (
     <MyContext.Consumer>
       {context => (

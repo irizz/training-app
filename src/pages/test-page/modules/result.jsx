@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import { MyContext } from "../MyProvider";
+import { MyContext } from "../../../provider";
 
 export class Result extends React.Component {
   constructor(props) {

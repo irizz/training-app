@@ -7,7 +7,7 @@ import {
   ControlLabel
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "../MyProvider";
+import { MyContext } from "../../../provider";
 
 export class TasksSelection extends React.Component {
   constructor(props) {

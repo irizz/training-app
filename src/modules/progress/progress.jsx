@@ -1,6 +1,6 @@
 import React from "react";
 import { ProgressBar } from "react-bootstrap";
-import { MyContext } from "../MyProvider";
+import { MyContext } from "../../provider";
 
 export const Progress = props => {
   return (

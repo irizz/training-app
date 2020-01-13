@@ -10,8 +10,8 @@ import {
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import {
-  ASSETS_PATH,
-  ROOT_PATH,
+  ASSETS_DIR_PATH,
+  HOME_PAGE_PATH,
   TEST_INTRO_PAGE_PATH,
   TRAIN_INTRO_PAGE_PATH
 } from "../../constants";
