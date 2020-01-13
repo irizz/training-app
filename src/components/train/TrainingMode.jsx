@@ -2,7 +2,7 @@ import React from "react";
 import { Pager, Button, Panel } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { MyContext } from "../MyProvider";
-import { Sandbox } from "./Sandbox";
+import { Sandbox } from "../sandbox";
 import { Progress } from "./Progress";
 
 export class TrainingMode extends React.Component {

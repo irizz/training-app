@@ -1,8 +1,8 @@
 import React from "react";
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
 import { MyContext } from "../MyProvider";
+import { Sandbox } from "../sandbox";
 import { Progress } from "../train/Progress";
-import { Sandbox } from "../train/Sandbox";
 import { BtnPanel } from "./BtnPanel";
 import { Result } from "./Result";
 
