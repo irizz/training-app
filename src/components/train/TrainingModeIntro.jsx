@@ -1,10 +1,7 @@
 import React from "react";
-//components
-import { TasksSelection } from "./TasksSelection";
-//context
-import { MyContext } from "../MyProvider";
-//style
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
+import { MyContext } from "../MyProvider";
+import { TasksSelection } from "./TasksSelection";
 
 export class TrainingModeIntro extends React.Component {
   constructor(props) {

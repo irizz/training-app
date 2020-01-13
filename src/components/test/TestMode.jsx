@@ -1,13 +1,10 @@
 import React from "react";
-//components
+import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
+import { MyContext } from "../MyProvider";
+import { Progress } from "../train/Progress";
 import { Sandbox } from "../train/Sandbox";
 import { BtnPanel } from "./BtnPanel";
-import { Progress } from "../train/Progress";
 import { Result } from "./Result";
-//context
-import { MyContext } from "../MyProvider";
-//style
-import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
 
 export class TestMode extends React.Component {
   render() {

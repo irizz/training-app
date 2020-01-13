@@ -1,25 +1,20 @@
 import React from "react";
-//components
-import { Output } from "./Output";
-//overwritten console methods
-import { ConsoleMethods } from "../../ConsoleMethods";
-//context
-import { MyContext } from "../MyProvider";
-//style
 import {
-  Col,
   Alert,
-  Panel,
   Button,
-  Tooltip,
-  OverlayTrigger
+  Col,
+  OverlayTrigger,
+  Panel,
+  Tooltip
 } from "react-bootstrap";
-//CodeMirror
 import { Controlled as CodeMirror } from "react-codemirror2";
 import "codemirror/mode/markdown/markdown";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/neo.css";
+import { ConsoleMethods } from "../../ConsoleMethods";
+import { MyContext } from "../MyProvider";
+import { Output } from "./Output";
 
 export class Sandbox extends React.Component {
   constructor(props) {
@@ -33,7 +28,7 @@ export class Sandbox extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.preCode != nextProps.preCode) {
+    if (this.props.preCode != nextProps.preCode) {
       this.setState({
         code: nextProps.preCode,
         codeReturn: nextProps.codeReturn,

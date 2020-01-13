@@ -1,8 +1,6 @@
 import React from "react";
-//components
-import { ModesDescription } from "./ModesDescription";
-//style
 import { Panel, ListGroup, ListGroupItem } from "react-bootstrap";
+import { ModesDescription } from "./ModesDescription";
 
 export class Home extends React.Component {
   constructor(props) {
@@ -16,7 +14,7 @@ export class Home extends React.Component {
           <ListGroup>
             <ListGroupItem>
               <h3>Добро пожаловать в интерактивный задачник JavaScript</h3>
-              <p>Выберите подходящий режим:</p>
+              <p>Выберите нужный режим:</p>
             </ListGroupItem>
             <ListGroupItem>
               <ModesDescription />

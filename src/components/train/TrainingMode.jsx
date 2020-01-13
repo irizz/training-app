@@ -1,13 +1,9 @@
 import React from "react";
-// components
+import { Pager, Button, Panel } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { MyContext } from "../MyProvider";
 import { Sandbox } from "./Sandbox";
 import { Progress } from "./Progress";
-//context
-import { MyContext } from "../MyProvider";
-// router
-import { LinkContainer } from "react-router-bootstrap";
-//style
-import { Pager, Button, Panel } from "react-bootstrap";
 
 export class TrainingMode extends React.Component {
   constructor(props) {

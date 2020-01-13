@@ -1,10 +1,7 @@
 import React from "react";
-//router
-import { LinkContainer } from "react-router-bootstrap";
-//context
-import { MyContext } from "../MyProvider";
-//style
 import { Panel, ListGroup, ListGroupItem, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { MyContext } from "../MyProvider";
 
 export class TestModeIntro extends React.Component {
   render() {

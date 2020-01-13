@@ -1,9 +1,4 @@
 import React from "react";
-//context
-import { MyContext } from "../MyProvider";
-//router
-import { LinkContainer } from "react-router-bootstrap";
-//style
 import {
   Form,
   FormGroup,
@@ -11,6 +6,8 @@ import {
   Button,
   ControlLabel
 } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { MyContext } from "../MyProvider";
 
 export class TasksSelection extends React.Component {
   constructor(props) {

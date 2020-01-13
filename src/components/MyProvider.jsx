@@ -1,11 +1,8 @@
 import React from "react";
-//data
-import { Tasks } from "../Tasks";
-// tests
-import "mocha/mocha";
-import chai from "chai";
-// style
 import { Alert } from "react-bootstrap";
+import chai from "chai";
+import "mocha/mocha";
+import { Tasks } from "../Tasks";
 
 export const MyContext = React.createContext();
 

@@ -1,18 +1,15 @@
 import React from "react";
-// router
-import { LinkContainer } from "react-router-bootstrap";
-//context
-import { MyContext } from "./MyProvider";
-// style
 import {
-  Row,
   Col,
-  Navbar,
-  NavItem,
+  Image,
   Nav,
+  Navbar,
   NavbarBrand,
-  Image
+  NavItem,
+  Row
 } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { MyContext } from "./MyProvider";
 
 export const Navigation = props => {
   return (
@@ -24,19 +21,11 @@ export const Navigation = props => {
               <Navbar.Header>
                 <NavbarBrand>
                   <LinkContainer to="/">
-                    <Image
-                      src="src/icons/notebook64.png"
-                      alt="Icon made by 
-                  Smashicons(https://www.flaticon.com/authors/smashicons) 
-                  from www.flaticon.com "
-                    />
+                    <Image src="src/icons/notebook64.png" />
                   </LinkContainer>
                 </NavbarBrand>
               </Navbar.Header>
               <Nav>
-                <LinkContainer to="/learn">
-                  <NavItem>Учебник</NavItem>
-                </LinkContainer>
                 <LinkContainer to="/train">
                   <NavItem onClick={context.setModeToTraining}>
                     Тренировка

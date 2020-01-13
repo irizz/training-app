@@ -1,7 +1,4 @@
 import React from "react";
-//context
-import { MyContext } from "../MyProvider";
-//style
 import {
   Panel,
   Tabs,
@@ -10,6 +7,7 @@ import {
   Tooltip,
   OverlayTrigger
 } from "react-bootstrap";
+import { MyContext } from "../MyProvider";
 
 export const Output = props => {
   const tooltip3 = (
