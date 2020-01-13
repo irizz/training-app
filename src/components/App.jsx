@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Row, Col } from "react-bootstrap";
-import { Navigation } from "./Navigation";
+import { Navigation } from "./navigation";
 import { MyRouter } from "./MyRouter";
 import { MyProvider } from "./MyProvider";
 

@@ -9,7 +9,7 @@ import {
   Row
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { MyContext } from "./MyProvider";
+import { MyContext } from "../MyProvider";
 
 export const Navigation = props => {
   return (
