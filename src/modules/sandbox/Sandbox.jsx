@@ -13,7 +13,7 @@ import "codemirror/mode/javascript/javascript";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/neo.css";
 import { MyContext } from "../../provider";
-import { ConsoleMethods } from "../../custom-console-methods";
+import { replaceConsoleMethodsWithCustom } from "../../utils/custom-console-methods";
 import { SandboxOutput } from "./sandbox-output";
 
 export class Sandbox extends React.Component {
@@ -45,7 +45,7 @@ export class Sandbox extends React.Component {
     const consStr = "console.log";
     try {
       if (this.state.code.indexOf(consStr) !== -1) {
-        ConsoleMethods();
+        replaceConsoleMethodsWithCustom();
         eval(this.state.code);
       } else {
         let userFunc = new Function(this.state.code + this.state.codeReturn);

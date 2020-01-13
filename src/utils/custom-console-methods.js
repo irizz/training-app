@@ -1,12 +1,14 @@
-export const ConsoleMethods = () => {
-  const element = document.getElementById("consoleOutput");
-
-  const add = something => {
+/**
+ * Custom console methods are used so that user 
+ * could see console messages directly on the page
+ */
+export const replaceConsoleMethodsWithCustom = () => {
+  const element = document.getElementById("sandbox-console-output");
+  const add = message => {
     const node = document.createElement("div");
-    node.innerHTML = "<p>" + something + "</p>";
+    node.innerHTML = "<p>" + message + "</p>";
     element.appendChild(node);
   };
-
   const originalError = console.error;
   const originalLog = console.log;
   const originalWarning = console.warn;

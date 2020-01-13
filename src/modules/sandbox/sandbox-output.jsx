@@ -26,7 +26,7 @@ export const SandboxOutput = props => {
           >
             <Tab eventKey={1} title="Вывод">
               <div>{props.output}</div>
-              <div id="consoleOutput" />
+              <div id="sandbox-console-output" />
             </Tab>
             <Tab
               eventKey={2}
