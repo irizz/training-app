@@ -31,6 +31,7 @@ export class ModesDescription extends React.Component {
           <PanelGroup
             accordion
             className="modes-description"
+            id="panel-group"
             activeKey={activeKey}
             onSelect={this.handleSelect}
           >

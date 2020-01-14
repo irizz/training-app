@@ -2,323 +2,261 @@ import React from "react";
 import { Alert } from "react-bootstrap";
 import chai from "chai";
 import "mocha/mocha";
+import { DEFAULT_OUTPUT_TEXT, MODES, TASKS_NOT_FOUND_ERROR } from "./constants";
 import { TASKS } from "./tasks";
 
 export const MyContext = React.createContext();
 
 export class MyProvider extends React.Component {
-  state = {
+  defaultOutputState = {
+    currentOutputTab: 1,
+    defaultOutput: DEFAULT_OUTPUT_TEXT,
+    outputShadowColor: "",
+    testError: ""
+  };
+
+  defaultSessionState = {
     complexityArr: [],
     sectionArr: [],
-    filteredTasks: [],
-    currentTask: {},
-    progressNow: 0,
-    progressMax: 0,
     completed: 0,
     skipped: 0,
     correct: 0,
     failed: 0,
+    progressNow: 0,
     isBtnDisabled: false,
-    defaultOutput: "Результат выполнения кода",
-    currentOutputTab: 1,
-    outputShadowColor: "",
-    showResultModal: false,
-    testError: "",
-    currentMode: "",
     isBtnPanelHidden: false,
     isFinishBtnHidden: true
   };
 
-  handleComplexityCheck = () => {
-    if (this.state.complexityArr.indexOf(event.target.value) == -1) {
-      this.state.complexityArr.push(event.target.value);
-    } else {
-      this.state.complexityArr.splice(
-        this.state.complexityArr.indexOf(event.target.value),
-        1
-      );
-    }
+  initState = {
+    filteredTasks: [],
+    currentTask: {},
+    progressMax: 0,
+    showResultModal: false,
+    currentMode: "",
+    ...this.defaultOutputState,
+    ...this.defaultSessionState
   };
 
-  handleSectionCheck = () => {
-    if (this.state.sectionArr.indexOf(event.target.value) == -1) {
-      this.state.sectionArr.push(event.target.value);
-    } else {
-      this.state.sectionArr.splice(
-        this.state.sectionArr.indexOf(event.target.value),
-        1
-      );
-    }
+  state = {
+    ...this.initState
   };
 
-  setModeToTest = () => {
+  errorTask = {
+    id: 9999,
+    description: <Alert bsStyle="danger">Error: No more tasks</Alert>,
+    preCode: "//Error"
+  };
+
+  clearPrevSession = () => {
     this.setState({
-      currentMode: "test"
+      currentOutputTab: 1,
+      ...this.defaultSessionState
     });
   };
 
-  setModeToTraining = () => {
+  clearTestOutput = () => {
+    document.getElementById("mocha").innerHTML = "";
+    mocha.suite.suites = [];
     this.setState({
-      currentMode: "training"
+      outputShadowColor: ""
     });
+  };
+
+  decrementTaskIndex = arr => {
+    const { currentTask } = this.state;
+    let idx = arr.indexOf(currentTask);
+
+    if (idx > 0) {
+      --idx;
+      return arr[idx];
+    } else {
+      return this.errorTask;
+    }
+  };
+
+  getErrorAlert = errorText => <Alert bsStyle="danger">{errorText}</Alert>;
+
+  handleCloseModal = () => {
+    this.setState({ showResultModal: false });
+  };
+
+  handleComplexityCheck = () => this.toggleCheckboxValue("complexityArr");
+
+  handleContinueBtn = () => {
+    let { completed, filteredTasks, progressMax, progressNow } = this.state;
+
+    this.clearTestOutput();
+    if (progressNow < progressMax - 1) {
+      this.setState({
+        currentTask: this.incrementTaskIndex(filteredTasks),
+        progressNow: ++progressNow,
+        completed: ++completed,
+        isBtnDisabled: false,
+        ...this.defaultOutputState
+      });
+    } else if (progressNow == progressMax - 1) {
+      this.setState({
+        progressNow: ++progressNow,
+        completed: ++completed,
+        showResultModal: true,
+        isBtnPanelHidden: true,
+        isFinishBtnHidden: false,
+        isBtnDisabled: false,
+        ...this.defaultOutputState
+      });
+    } else if (progressNow > progressMax - 1) {
+      this.setState({
+        showResultModal: true
+      });
+    }
+  };
+
+  handleNextBtn = () => {
+    let { progressNow, progressMax, filteredTasks } = this.state;
+    this.clearTestOutput();
+
+    if (progressNow < progressMax - 1) {
+      this.setState({
+        currentTask: this.incrementTaskIndex(filteredTasks),
+        progressNow: ++progressNow,
+        ...this.defaultOutputState
+      });
+    } else if (progressNow == progressMax - 1) {
+      this.setState({
+        progressNow: ++progressNow,
+        isBtnPanelHidden: true,
+        isFinishBtnHidden: false,
+        ...this.defaultOutputState
+      });
+    }
+  };
+
+  handlePrevBtn = () => {
+    let { filteredTasks, progressNow, progressMax } = this.state;
+    this.clearTestOutput();
+
+    if (progressNow > 0 && progressNow < progressMax) {
+      this.setState({
+        currentTask: this.decrementTaskIndex(filteredTasks),
+        progressNow: --progressNow,
+        ...this.defaultOutputState
+      });
+    } else if (progressNow == progressMax) {
+      this.setState({
+        progressNow: --progressNow,
+        ...this.defaultOutputState
+      });
+    } else {
+      this.setState({
+        ...this.defaultOutputState
+      });
+    }
+  };
+
+  handleSectionCheck = () => this.toggleCheckboxValue("sectionArr");
+
+  handleSelectTab = key => {
+    this.setState({ currentOutputTab: key });
+  };
+
+  handleSkipBtn = () => {
+    let { filteredTasks, progressNow, progressMax, skipped } = this.state;
+    this.clearTestOutput();
+
+    if (progressNow < progressMax - 1) {
+      this.setState({
+        currentTask: this.incrementTaskIndex(filteredTasks),
+        progressNow: ++progressNow,
+        skipped: ++skipped,
+        ...this.defaultOutputState
+      });
+    } else if (progressNow == progressMax - 1) {
+      this.setState({
+        progressNow: ++progressNow,
+        skipped: ++skipped,
+        showResultModal: true,
+        isBtnPanelHidden: true,
+        isFinishBtnHidden: false,
+        ...this.defaultOutputState
+      });
+    } else if (progressNow > progressMax - 1) {
+      this.setState({
+        showResultModal: true
+      });
+    }
   };
 
   handleStartClick = () => {
     event.preventDefault();
+    const { complexityArr, currentMode, sectionArr } = this.state;
 
-    if (this.state.currentMode == "training") {
-      // TRAINING MODE
-      if (
-        //in case if only one filter was chosen
-        this.state.complexityArr[0] == undefined &&
-        this.state.sectionArr[0] != undefined
-      ) {
+    if (currentMode == MODES.TRAIN) {
+      const isComplexityChecked = complexityArr.length > 0;
+      const isSectionChecked = sectionArr.length > 0;
+
+      if (!isComplexityChecked && isSectionChecked) {
         this.state.filteredTasks = TASKS.filter(
-          task => this.state.sectionArr.indexOf(task.section) != -1
+          task => sectionArr.indexOf(task.section) !== -1
         );
-      } else if (
-        //same, but other filter
-        this.state.sectionArr[0] == undefined &&
-        this.state.complexityArr[0] != undefined
-      ) {
+      } else if (isComplexityChecked && !isSectionChecked) {
         this.state.filteredTasks = TASKS.filter(
-          task => this.state.complexityArr.indexOf(task.complexity) != -1
+          task => complexityArr.indexOf(task.complexity) !== -1
         );
-      } else {
-        // if both filters were clicked
+      } else if (isComplexityChecked && isSectionChecked) {
         this.state.filteredTasks = TASKS.filter(
           task =>
-            this.state.complexityArr.indexOf(task.complexity) != -1 &&
-            this.state.sectionArr.indexOf(task.section) != -1
+            complexityArr.indexOf(task.complexity) !== -1 &&
+            sectionArr.indexOf(task.section) !== -1
         );
       }
 
       if (
-        //if one or both filters were chosen, but there's not a single task with such criterias
-        (this.state.filteredTasks[0] == undefined &&
-          this.state.complexityArr[0] != undefined) ||
-        (this.state.filteredTasks[0] == undefined &&
-          this.state.sectionArr[0] != undefined)
+        this.state.filteredTasks.length == 0 &&
+        (isComplexityChecked || isSectionChecked)
       ) {
-        alert(
-          "Не удалось найти задачи с выбранными критериями. Будут отображены все задачи, присутствующие в базе."
-        );
-        this.setState({
-          filteredTasks: TASKS,
-          progressMax: TASKS.length,
-          currentTask: TASKS[0]
-        });
+        alert(TASKS_NOT_FOUND_ERROR);
+        this.setAllTasks();
       } else if (
-        // if user didn't choose any criteria and wants to see all tasks
-        this.state.filteredTasks[0] == undefined &&
-        this.state.complexityArr[0] == undefined &&
-        this.state.sectionArr[0] == undefined
+        this.state.filteredTasks.length == 0 &&
+        !isComplexityChecked &&
+        !isSectionChecked
       ) {
-        this.setState({
-          filteredTasks: TASKS,
-          progressMax: TASKS.length,
-          currentTask: TASKS[0]
-        });
+        this.setAllTasks();
       } else {
-        // if criterias were chosen and there are tasks with such criterias
         this.setState({
           currentTask: this.state.filteredTasks[0],
           progressMax: this.state.filteredTasks.length
         });
       }
       this.clearPrevSession();
-    } else if (this.state.currentMode == "test") {
-      // TEST MODE
+    } else if (currentMode == MODES.TEST) {
       this.clearPrevSession();
-      this.setState({
-        filteredTasks: TASKS,
-        progressMax: TASKS.length,
-        currentTask: TASKS[0]
-      });
-    }
-  };
-
-  clearPrevSession = () => {
-    this.state.complexityArr = [];
-    this.state.sectionArr = [];
-    this.setState({
-      completed: 0,
-      skipped: 0,
-      correct: 0,
-      failed: 0,
-      progressNow: 0,
-      currentOutputTab: 1,
-      isBtnDisabled: false,
-      isBtnPanelHidden: false,
-      isFinishBtnHidden: true
-    });
-  };
-
-  handleSkipBtn = () => {
-    this.clearTestOutput();
-    if (this.state.progressNow < this.state.progressMax - 1) {
-      this.setState({
-        currentTask: this.incrementTaskIndex(this.state.filteredTasks),
-        progressNow: ++this.state.progressNow,
-        skipped: ++this.state.skipped,
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: ""
-      });
-    } else if (this.state.progressNow == this.state.progressMax - 1) {
-      this.setState({
-        progressNow: ++this.state.progressNow,
-        skipped: ++this.state.skipped,
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        showResultModal: true,
-        testError: "",
-        outputShadowColor: "",
-        isBtnPanelHidden: true,
-        isFinishBtnHidden: false
-      });
-    } else if (this.state.progressNow > this.state.progressMax - 1) {
-      this.setState({
-        showResultModal: true
-      });
-    }
-  };
-
-  handleContinueBtn = () => {
-    this.clearTestOutput();
-    if (this.state.progressNow < this.state.progressMax - 1) {
-      this.setState({
-        currentTask: this.incrementTaskIndex(this.state.filteredTasks),
-        progressNow: ++this.state.progressNow,
-        completed: ++this.state.completed,
-        defaultOutput: this.state.defaultOutput,
-        isBtnDisabled: false,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: ""
-      });
-    } else if (this.state.progressNow == this.state.progressMax - 1) {
-      this.setState({
-        progressNow: ++this.state.progressNow,
-        completed: ++this.state.completed,
-        defaultOutput: this.state.defaultOutput,
-        isBtnDisabled: false,
-        currentOutputTab: 1,
-        showResultModal: true,
-        testError: "",
-        outputShadowColor: "",
-        isBtnPanelHidden: true,
-        isFinishBtnHidden: false
-      });
-    } else if (this.state.progressNow > this.state.progressMax - 1) {
-      this.setState({
-        showResultModal: true
-      });
-    }
-  };
-
-  handlePrevBtn = () => {
-    this.clearTestOutput();
-    if (
-      this.state.progressNow > 0 &&
-      this.state.progressNow < this.state.progressMax
-    ) {
-      this.setState({
-        currentTask: this.decrementTaskIndex(this.state.filteredTasks),
-        progressNow: --this.state.progressNow,
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: ""
-      });
-    } else if (this.state.progressNow == this.state.progressMax) {
-      this.setState({
-        progressNow: --this.state.progressNow,
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: ""
-      });
-    } else {
-      this.setState({
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: ""
-      });
-    }
-  };
-
-  handleNextBtn = () => {
-    this.clearTestOutput();
-    if (this.state.progressNow < this.state.progressMax - 1) {
-      this.setState({
-        currentTask: this.incrementTaskIndex(this.state.filteredTasks),
-        progressNow: ++this.state.progressNow,
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: ""
-      });
-    } else if (this.state.progressNow == this.state.progressMax - 1) {
-      this.setState({
-        progressNow: ++this.state.progressNow,
-        defaultOutput: this.state.defaultOutput,
-        currentOutputTab: 1,
-        testError: "",
-        outputShadowColor: "",
-        isBtnPanelHidden: true,
-        isFinishBtnHidden: false
-      });
+      this.setAllTasks();
     }
   };
 
   incrementTaskIndex = arr => {
-    let arrEl = this.state.currentTask;
-    let arrIndex = arr.indexOf(arrEl);
-    let lastIndex = this.state.filteredTasks.length - 1;
+    const { currentTask, filteredTasks } = this.state;
+    let idx = arr.indexOf(currentTask);
 
-    if (arrIndex < lastIndex) {
-      ++arrIndex;
-      return arr[arrIndex];
+    if (idx < filteredTasks.length - 1) {
+      ++idx;
+      return arr[idx];
     } else {
-      return {
-        id: 9999,
-        description: <Alert bsStyle="danger">Error: No more tasks</Alert>,
-        preCode: "//Error"
-      };
+      return this.errorTask;
     }
-  };
-
-  decrementTaskIndex = arr => {
-    let arrEl = this.state.currentTask;
-    let arrIndex = arr.indexOf(arrEl);
-
-    if (arrIndex > 0) {
-      --arrIndex;
-      return arr[arrIndex];
-    } else {
-      return {
-        id: 9999,
-        description: <Alert bsStyle="danger">Error: No more tasks</Alert>,
-        preCode: "//Error"
-      };
-    }
-  };
-
-  clearTestOutput = () => {
-    document.getElementById("mocha").innerHTML = "";
-    mocha.suite.suites = [];
-    console.clear();
-    this.setState({
-      outputShadowColor: ""
-    });
   };
 
   runTests = userCode => {
     this.clearTestOutput();
-
+    let {
+      correct,
+      currentMode,
+      currentTask,
+      failed,
+      isBtnDisabled
+    } = this.state;
     let failedTest = 0;
     let correctTest = 0;
 
@@ -326,13 +264,13 @@ export class MyProvider extends React.Component {
       window.eval(userCode);
     } catch (error) {
       this.setState({
-        testError: <Alert bsStyle="danger">{error.toString()}</Alert>
+        testError: this.getErrorAlert(error.toString())
       });
     }
 
     mocha.setup("bdd");
     let assert = chai.assert;
-    eval(this.state.currentTask.test);
+    eval(currentTask.test);
 
     mocha
       .run()
@@ -340,7 +278,7 @@ export class MyProvider extends React.Component {
         if (failedTest == 0) {
           ++failedTest;
           this.setState({
-            failed: ++this.state.failed,
+            failed: ++failed,
             outputShadowColor: "output-shadow-red"
           });
         }
@@ -349,30 +287,53 @@ export class MyProvider extends React.Component {
         if (failedTest == 0 && correctTest == 0) {
           ++correctTest;
           this.setState({
-            correct: ++this.state.correct,
+            correct: ++correct,
             outputShadowColor: "output-shadow-green"
           });
         }
       });
 
-    if (this.state.currentMode == "test") {
+    if (currentMode == MODES.TEST) {
       this.setState({
         currentOutputTab: 2,
-        isBtnDisabled: !this.state.isBtnDisabled
+        isBtnDisabled: !isBtnDisabled
       });
-    } else if (this.state.currentMode == "training") {
+    } else if (currentMode == MODES.TRAIN) {
       this.setState({
         currentOutputTab: 2
       });
     }
   };
 
-  handleSelectTab = key => {
-    this.setState({ currentOutputTab: key });
+  setAllTasks = () => {
+    this.setState({
+      filteredTasks: TASKS,
+      progressMax: TASKS.length,
+      currentTask: TASKS[0]
+    });
   };
 
-  handleCloseModal = () => {
-    this.setState({ showResultModal: false });
+  setModeToTest = () => {
+    this.setState({
+      currentMode: MODES.TEST
+    });
+  };
+
+  setModeToTraining = () => {
+    this.setState({
+      currentMode: MODES.TRAIN
+    });
+  };
+
+  toggleCheckboxValue = arrName => {
+    const { value } = event.target;
+    const idx = this.state[arrName].indexOf(value);
+
+    if (idx == -1) {
+      this.state[arrName].push(value);
+    } else {
+      this.state[arrName].splice(idx, 1);
+    }
   };
 
   render() {
