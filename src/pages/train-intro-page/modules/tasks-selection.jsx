@@ -30,6 +30,7 @@ export class TasksSelection extends React.Component {
                 {COMPLEXITY_VALUES.map(item => (
                   <Checkbox
                     inline
+                    key={item.value}
                     value={item.value}
                     onClick={context.handleComplexityCheck}
                   >
@@ -41,6 +42,7 @@ export class TasksSelection extends React.Component {
               <FormGroup>
                 {SECTION_VALUES.map(item => (
                   <Checkbox
+                    key={item.value}
                     value={item.value}
                     onClick={context.handleSectionCheck}
                   >

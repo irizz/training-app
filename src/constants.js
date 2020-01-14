@@ -52,3 +52,10 @@ export const SECTION_VALUES = Object.freeze([
     value: "es6"
   }
 ]);
+
+export const DEFAULT_OUTPUT_TEXT = "Результат выполнения кода";
+export const TASKS_NOT_FOUND_ERROR = "Не удалось найти задачи с выбранными критериями. Будут отображены все задачи, присутствующие в базе.";
+export const MODES = {
+  TEST: "test",
+  TRAIN: "training"
+};
